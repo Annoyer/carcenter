@@ -9,6 +9,10 @@ import java.util.List;
  */
 public interface CustomerService {
 
+    boolean register(Customer customer);
+
+    Customer login(String phone, String password);
+
     List<Customer> getAllCustomers();
 
     Customer getCustomerById(Integer id);

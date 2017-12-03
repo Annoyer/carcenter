@@ -1,0 +1,52 @@
+.btn-usual{
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    background-color: #269abc;
+}
+
+.btn-md-my{
+    font-size: 20px;
+    padding: 8px 20px;
+}
+
+.page-title{
+    font-size: 36px;
+}
+
+.font-warning{
+    color: #ff0000;
+}
+
+.container-flex-center{
+    display: flex;
+    justify-content: center;
+}
+
+.container-center{
+    text-align: center;
+}
+
+.offset-5{
+    margin-top: 5px;
+}
+
+.offset-10{
+    margin-top: 10px;
+}
+
+.offset-15{
+    margin-top: 15px;
+}
+
+.offset-20{
+    margin-top: 20px;
+}
+
+.offset-30 {
+    margin-top: 30px;
+}
+
+.offset-50{
+    margin-top: 50px;
+}

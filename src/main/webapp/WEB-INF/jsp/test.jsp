@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: joy12
@@ -11,10 +11,6 @@
 <html>
 <head>
     <title>test</title>
-    <link href="${path}/static/css/bootstrap.min.css" rel="stylesheet">
-
-    <script src="${path}/static/js/jquery.min.js"  charset="UTF-8"></script>
-    <script src="${path}/static/js/bootstrap.min.js"  charset="UTF-8"></script>
 </head>
 <body>
 <div>

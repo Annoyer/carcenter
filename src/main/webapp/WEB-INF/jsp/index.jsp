@@ -3,6 +3,8 @@
 <html>
 <body>
 <h2>Hello World!</h2>
+<div>admin:${admin.name}</div>
+<div>customer:${customer.name}</div>
 <button onclick="location='${pageContext.request.contextPath}/customer/listAll'">跳转显示所有顾客</button>
 </body>
 </html>

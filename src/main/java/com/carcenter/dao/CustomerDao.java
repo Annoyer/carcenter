@@ -9,6 +9,10 @@ import java.util.List;
  */
 public interface CustomerDao {
 
+    void save(Customer customer);
+
+    List<Customer> getCustomerByPhone(String phone);
+
     List<Customer> getAllCustomers();
 
     Customer getCustomerById(Integer id);

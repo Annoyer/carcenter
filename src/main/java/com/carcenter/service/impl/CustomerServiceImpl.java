@@ -16,6 +16,30 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerDao customerDao;
 
+    public boolean register(Customer customer) {
+        boolean result = false;
+        if (customer.getPhone()!=null){
+            List<Customer> list = customerDao.getCustomerByPhone(customer.getPhone());
+            if (list==null || list.size()==0){
+                customerDao.save(customer);
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public Customer login(String phone, String password) {
+        List<Customer> list = customerDao.getCustomerByPhone(phone);
+        Customer customer = null;
+        if (list!=null && list.size()>0){
+            customer = list.get(0);
+            if (!password.equals(customer.getPassword())){
+                customer = null;
+            }
+        }
+        return customer;
+    }
+
     public List<Customer> getAllCustomers() {
         return customerDao.getAllCustomers();
     }
