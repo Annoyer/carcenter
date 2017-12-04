@@ -50,7 +50,7 @@ public class CustomerController {
     //非ajax请求示例
     @RequestMapping(value = "/listAll")
     public ModelAndView listAllCustomers(){
-        ModelAndView mv = new ModelAndView("test");
+        ModelAndView mv = new ModelAndView();
         mv.addObject("customersList",customerService.getAllCustomers());
         return mv;
     }

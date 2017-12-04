@@ -16,7 +16,7 @@ public class SimplePageController {
 
     @RequestMapping(value = "/admin_login")
     public String toAdminLogin(){
-        return "admin_login";
+        return "admin/admin_login";
     }
 
     @RequestMapping(value = "/register")
