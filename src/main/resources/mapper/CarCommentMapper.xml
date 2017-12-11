@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.carcenter.dao.CarCommentDao">
+    <resultMap id="commentMap" type="com.carcenter.model.CarComment">
+        <id property="id" column="id"/>
+        <result property="content" column="content"/>
+        <result property="createTime" column="create_time"/>
+        <association property="carOrder" javaType="CarOrder">
+            <id property="id" column="car_order_id"></id>
+            <result property="endDay" column="end_day"/>
+            <result property="carId" column="car_id"/>
+            <association property="customer" javaType="Customer">
+                <id property="id" column="hirer_id"></id>
+                <result property="name" column="name"/>
+                <result property="headimg" column="headimg"/>
+            </association>
+        </association>
+    </resultMap>
+
+    <select id="selectCommentByCarId" resultMap="commentMap">
+        SELECT cc.id,cc.content,cc.create_time, cc.car_order_id,
+            co.end_day,co.hirer_id,co.car_id,
+            cus.name,cus.headimg
+        FROM car_comment cc LEFT JOIN car_order co ON cc.car_order_id=co.id
+                            LEFT JOIN customer cus ON co.hirer_id=cus.id
+        WHERE co.car_id=#{id}
+    </select>
 </mapper>

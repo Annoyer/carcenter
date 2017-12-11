@@ -13,7 +13,7 @@
 <% Admin admin = (Admin) session.getAttribute("admin"); %>
 <% Customer customer = (Customer) session.getAttribute("customer"); %>
 
-<link href="${path}/static/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<script src="${path}/static/js/jquery.min.js"  charset="UTF-8"></script>
+<script src="${path}/static/js/jquery.js"  charset="UTF-8"></script>
 <script src="${path}/static/js/bootstrap.min.js"  charset="UTF-8"></script>

@@ -7,8 +7,6 @@ public class ParkingPlace {
     private Integer id;
     private Integer parkingLotId;
     private Integer identifier;
-    private Double priceMonth;
-    private Double priceDay;
     private Integer status;
 
     public Integer getId() {
@@ -33,22 +31,6 @@ public class ParkingPlace {
 
     public void setIdentifier(Integer identifier) {
         this.identifier = identifier;
-    }
-
-    public Double getPriceMonth() {
-        return priceMonth;
-    }
-
-    public void setPriceMonth(Double priceMonth) {
-        this.priceMonth = priceMonth;
-    }
-
-    public Double getPriceDay() {
-        return priceDay;
-    }
-
-    public void setPriceDay(Double priceDay) {
-        this.priceDay = priceDay;
     }
 
     public Integer getStatus() {

@@ -10,12 +10,49 @@ public class CarOrder {
     private Integer id;
     private Integer carId;
     private Integer hirerId;
-    private Integer price;
+    private Double price;
     private Integer rentingPeriodMonth;
+    private Integer rentingPeriodWeek;
     private Integer rentingPeriodDay;
     private Date startDay;
-    private Integer status;
+    private Date endDay;
+    private Integer status;//0未进行 1正在进行 2待进行 3历史订单
     private Timestamp createTime;
+
+    private Customer customer;
+    private Car car;
+
+    public Integer getRentingPeriodWeek() {
+        return rentingPeriodWeek;
+    }
+
+    public void setRentingPeriodWeek(Integer rentingPeriodWeek) {
+        this.rentingPeriodWeek = rentingPeriodWeek;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public Date getEndDay() {
+        return endDay;
+    }
+
+    public void setEndDay(Date endDay) {
+        this.endDay = endDay;
+    }
 
     public Integer getId() {
         return id;
@@ -41,11 +78,11 @@ public class CarOrder {
         this.hirerId = hirerId;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

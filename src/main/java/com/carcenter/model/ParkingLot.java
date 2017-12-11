@@ -9,6 +9,24 @@ public class ParkingLot {
     private String address;
     private Integer volumn;
     private Integer currentNum;
+    private Double priceMonth;
+    private Double priceDay;
+
+    public Double getPriceMonth() {
+        return priceMonth;
+    }
+
+    public void setPriceMonth(Double priceMonth) {
+        this.priceMonth = priceMonth;
+    }
+
+    public Double getPriceDay() {
+        return priceDay;
+    }
+
+    public void setPriceDay(Double priceDay) {
+        this.priceDay = priceDay;
+    }
 
     public Integer getId() {
         return id;

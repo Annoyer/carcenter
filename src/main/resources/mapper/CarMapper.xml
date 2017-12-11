@@ -1,4 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.carcenter.dao.CarDao">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.carcenter.model.Car">
+        INSERT INTO car(owner_id,license,brand,brand_type,manufacture_year,color,passenger_num,photo,status,create_time,price_day,price_week,price_month,city)
+                VALUES (#{ownerId},#{license},#{brand},#{brandType},#{manufactureYear},#{color},#{passengerNum},#{photo},#{status},#{createTime},#{priceDay},#{priceWeek},#{priceMonth},#{city})
+    </insert>
+    <update id="update">
+        UPDATE car
+        SET
+        <if test="license!=''"> and license=#{license}</if>
+        <if test="brand!=''"> and brand=#{brand}</if>
+        <if test="brand_type!=''"> and brand_type=#{brandType}</if>
+        <if test="manufactureYear!=''"> and manufacture_year=#{manufactureYear}</if>
+        <if test="color!=''"> and color=#{color}</if>
+        <if test="passengerNum!=''"> and passenger_num=#{passengerNum}</if>
+        <if test="photo!=''"> and photo=#{photo}</if>
+        <if test="status!=''"> and status=#{status}</if>
+        <if test="price_day!=''"> and price_day=#{priceDay}</if>
+        <if test="price_week!=''"> and price_week=#{priceWeek}</if>
+        <if test="price_month!=''"> and price_month=#{priceMonth}</if>
+        <if test="city!=''"> and city=#{city}</if>
+        where id=#{id}
+    </update>
+    <update id="updateStatusById">
+        UPDATE car
+        SET status=#{status} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM car WHERE id=#{id}
+    </delete>
+    <select id="selectAllCars" resultType="com.carcenter.model.Car">
+        SELECT * FROM car
+    </select>
+    <select id="selectCarsByStatus" resultType="com.carcenter.model.Car" parameterType="Integer">
+        SELECT * FROM car WHERE status=#{status}
+    </select>
+    <select id="selectCarsByAvailableTime" resultType="com.carcenter.model.Car">
+        SELECT * FROM car,car_order WHERE car.status=0 OR
+                                        (car.status=2 AND car.id=car_order.car_id AND
+                                            (car_order.start_day BETWEEN #{end} AND '2200-12-31'
+                                              or (car_order.end_day BETWEEN '2000-01-01' AND #{start} ))
+    </select>
+    <select id="selectCarsByAttributes" resultType="com.carcenter.model.Car" parameterType="Map">
+        select car.* from car LEFT JOIN car_order ON car.id=car_order.car_id where 1=1
+        <if test="brand!=null"> and brand=#{brand}</if>
+        <if test="yearMin!=null"> and manufacture_year &gt; #{yearMin}</if>
+        <if test="yearMax!=null"> and manufacture_year &lt; #{yearMax}</if>
+        <if test="color!=null"> and color=#{color}</if>
+        <if test="passengerNum!=null"> and passenger_num=#{passengerNum}</if>
+        <if test="priceDayMin!=null"> and price_day &gt; #{priceDayMin}</if>
+        <if test="priceDayMax!=null"> and price_day &lt; #{priceDayMax}</if>
+        <if test="city!=null"> and city=#{city}</if>
+        <if test="dateStart!=null and dateEnd!=null">
+            and (car.status=0 OR
+                  (car.status=2 AND car.id not in
+                      (SELECT car_id FROM car_order WHERE
+                                                    car_order.start_day BETWEEN #{dateStart} AND #{dateEnd}
+                                                  or car_order.end_day BETWEEN #{dateStart} AND #{dateEnd}
+                      )
+                  )
+                )
+        </if>
+    </select>
+    <select id="selectCarById" resultType="com.carcenter.model.Car">
+        SELECT * FROM car WHERE id=#{id}
+    </select>
+
 </mapper>

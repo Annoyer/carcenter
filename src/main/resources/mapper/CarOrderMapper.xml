@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.carcenter.dao.CarOrderDao">
+    <insert id="save" parameterType="CarOrder" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO car_order (car_id,hirer_id,price,renting_period_month,renting_period_week,renting_period_day,start_day,end_day,status,create_time)
+        VALUES (#{carId},#{hirerId},#{price},#{rentingPeriodMonth},#{rentingPeriodWeek},#{rentingPeriodDay},#{startDay},#{endDay},#{status},#{createTime})
+    </insert>
+    <select id="selectCarOrderByCarIdAndTime" resultType="com.carcenter.model.CarOrder">
+        SELECT id FROM car_order WHERE car_id=#{carId} AND (start_day BETWEEN '2000-01-01' AND #{end}
+                                              or end_day BETWEEN #{start} AND '2200-12-31')
+    </select>
 </mapper>

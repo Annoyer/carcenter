@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.carcenter.dao.ParkingLotDao">
+
+    <select id="selectAllParkingLot" resultType="com.carcenter.model.ParkingLot">
+        SELECT * FROM parking_lot
+    </select>
+    <select id="selectAvailableParkingPlaceByLotAndTime" resultType="com.carcenter.model.ParkingPlace">
+        SELECT * FROM parking_place p LEFT JOIN parking_order o ON p.id=o.parking_place_id LEFT JOIN parking_lot l ON p.parking_lot_id=l.id
+        WHERE l.id=1 AND
+        (p.status=0
+				OR (p.status=1 AND o.end_day BETWEEN '2000-01-01' AND #{start})
+				OR (p.status=2 AND
+                (o.start_day BETWEEN #{end} AND '2200-12-31'
+                  or (o.end_day BETWEEN '2000-01-01' AND #{start} )
+                )
+            )
+        ) ORDER BY p.id
+    </select>
+    <select id="selectParkingLotById" resultType="com.carcenter.model.ParkingLot">
+        SELECT * FROM parking_lot WHERE id=#{id}
+    </select>
 </mapper>

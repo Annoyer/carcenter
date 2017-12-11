@@ -6,17 +6,53 @@ import java.sql.Timestamp;
  * Created by joy12 on 2017/12/3.
  */
 public class Car {
-    private Integer id;
-    private Integer ownerId;
+    private Integer id;//不可修改
+    private Integer ownerId;//不可修改
     private String license;
-    private String brand;
+    private String brand;//筛选条件
     private String brandType;
-    private String manufactureYear;
-    private String color;
-    private Integer passengerNum;
+    private String manufactureYear;//筛选条件
+    private String color;//筛选条件
+    private Integer passengerNum;//7人以上为-1;筛选条件
     private String photo;
     private Integer status;
-    private Timestamp createTime;
+    private Timestamp createTime;//不可修改
+    private Double priceDay;//筛选条件
+    private Double priceMonth;
+    private Double priceWeek;
+    private String city;//取车点;筛选条件
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Double getPriceDay() {
+        return priceDay;
+    }
+
+    public void setPriceDay(Double priceDay) {
+        this.priceDay = priceDay;
+    }
+
+    public Double getPriceMonth() {
+        return priceMonth;
+    }
+
+    public void setPriceMonth(Double priceMonth) {
+        this.priceMonth = priceMonth;
+    }
+
+    public Double getPriceWeek() {
+        return priceWeek;
+    }
+
+    public void setPriceWeek(Double priceWeek) {
+        this.priceWeek = priceWeek;
+    }
 
     public Integer getId() {
         return id;

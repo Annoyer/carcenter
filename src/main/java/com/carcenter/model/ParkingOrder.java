@@ -10,11 +10,12 @@ public class ParkingOrder {
     private Integer id;
     private Integer parkingPlaceId;
     private Integer hirerId;
-    private Integer price;
+    private Double price;
     private Integer rentingPeriodMonth;
     private Integer rentingPeriodDay;
     private Date startDay;
-    private Integer status;
+    private Date endDay;
+    private Integer status;//0未进行 1正在进行 2待进行 3历史订单
     private Timestamp createTime;
 
     public Integer getId() {
@@ -41,11 +42,11 @@ public class ParkingOrder {
         this.hirerId = hirerId;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -71,6 +72,14 @@ public class ParkingOrder {
 
     public void setStartDay(Date startDay) {
         this.startDay = startDay;
+    }
+
+    public Date getEndDay() {
+        return endDay;
+    }
+
+    public void setEndDay(Date endDay) {
+        this.endDay = endDay;
     }
 
     public Integer getStatus() {

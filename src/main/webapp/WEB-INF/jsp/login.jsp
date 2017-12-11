@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="common/const.jsp" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>注册</title>
@@ -25,13 +26,13 @@
 <body>
     <div class="offset-50 container container-center">
         <div class="col-sm-12 col-md-12 page-title">登录</div>
-        <div class="offset-30 col-sm-12 col-md-12 form-group container-flex-center">
+        <div class="offset-30 col-sm-12 col-md-12 form-group container-flex-horizontal-center">
             <input class="form-control" id="phone" type="tel" placeholder="手机号">
         </div>
-        <div class="col-sm-12 col-md-12 form-group container-flex-center">
+        <div class="col-sm-12 col-md-12 form-group container-flex-horizontal-center">
             <input class="form-control" id="password" type="password" placeholder="密码">
         </div>
-        <div class="offset-15 col-sm-12 col-md-12 form-group container-flex-center">
+        <div class="offset-15 col-sm-12 col-md-12 form-group container-flex-horizontal-center">
             <button class="btn-md-my btn-usual" style="width: 15%" onclick="register()">确认</button>
         </div>
         <div class="col-sm-12 col-md-12 offset-30 font-warning" style="display: none">请完善信息</div>
