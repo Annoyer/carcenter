@@ -1,5 +1,7 @@
 package com.carcenter.service;
 
+import com.carcenter.model.CarComment;
+
 import java.util.Map;
 
 /**
@@ -7,4 +9,7 @@ import java.util.Map;
  */
 public interface CarOrderService {
     int makeOrder(Map<String,String[]> attrs);
+    boolean dealOrderByCarOwner(int orderId,boolean isAccpet);
+    boolean cancelOrderByCustomer(int orderId);
+    boolean makeComment(CarComment comment);
 }

@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.carcenter.dao.MessageDao">
+    <resultMap id="msg" type="Message">
+        <id property="id" column="id"/>
+        <result property="fromId" column="from_id"/>
+        <result property="toId" column="to_id"/>
+        <result property="content" column="content"/>
+        <result property="isRead" column="is_read"/>
+        <result property="createTime" column="create_time"/>
+        <association property="from" javaType="Customer">
+            <result property="name" column="name"/>
+        </association>
+        <association property="to" javaType="Customer">
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+    <insert id="save" parameterType="Message" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO message(from_id,to_id,content,create_time,is_read)
+        VALUES (#{fromId},#{toId},#{content},#{createTime},#{isRead})
+    </insert>
+    <update id="setIsRead">
+        UPDATE message
+        SET is_read=#{isRead}
+        WHERE id=#{id}
+    </update>
+    <select id="selectMessageByFromId" resultMap="msg">
+        SELECT m.*,f.name,t.name FROM message m, customer f, customer t WHERE m.from_id=#{fromId} AND m.from_id=f.id AND m.to_id=t.id
+    </select>
+    <select id="selectMessageByToId" resultMap="msg">
+            SELECT m.*,f.name,t.name FROM message m, customer f, customer t WHERE m.to_id=#{toId} AND m.from_id=f.id AND m.to_id=t.id
+    </select>
 </mapper>

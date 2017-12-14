@@ -5,4 +5,9 @@
         INSERT INTO parking_order (parking_place_id,hirer_id,price,renting_period_month,renting_period_day,start_day,end_day,status,create_time)
         VALUES (#{parkingPlaceId},#{hirerId},#{price},#{rentingPeriodMonth},#{rentingPeriodDay},#{startDay},#{endDay},#{status},#{createTime})
     </insert>
+    <update id="updateStatus">
+        UPDATE parking_order
+        SET status=#{status}
+        WHERE id=#{orderId}
+    </update>
 </mapper>

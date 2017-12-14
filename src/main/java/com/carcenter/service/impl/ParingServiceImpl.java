@@ -68,7 +68,7 @@ public class ParingServiceImpl implements ParkingService{
         order.setParkingPlaceId(parkingPlaceId);
         order.setHirerId(Integer.parseInt(attrs.get("hirerId")[0]));
         order.setPrice(Double.parseDouble(attrs.get("price")[0]));
-        order.setStatus(0);
+        order.setStatus(2);//待管理员确认
         Date start = null,end = null;
         Integer len = 0;
         try {
@@ -114,5 +114,9 @@ public class ParingServiceImpl implements ParkingService{
             calendar.add(Calendar.MONTH,diff);
         }
         return calendar.getTime();
+    }
+
+    public boolean cancelOrderByCustomer(int orderId) {
+        return parkingOrderDao.updateStatus(orderId,-2) > 0;
     }
 }

@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface CarCommentDao {
     List<CarComment> selectCommentByCarId(Integer id);
+    int insert(CarComment carComment);
 }

@@ -15,7 +15,7 @@ public class Car {
     private String color;//筛选条件
     private Integer passengerNum;//7人以上为-1;筛选条件
     private String photo;
-    private Integer status;
+    private Integer status;//0待租状态 1已租状态 2有订单，但当前仍然是待租状态 3车辆信息变更待审核
     private Timestamp createTime;//不可修改
     private Double priceDay;//筛选条件
     private Double priceMonth;

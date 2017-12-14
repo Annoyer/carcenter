@@ -99,6 +99,8 @@ public class CarServiceImpl implements CarService{
     }
 
     public boolean modifyCar(Car car) {
+        if(carDao.selectCarById(car.getId()).getStatus()!=0)
+            return false;
         return carDao.update(car) > 0;
     }
 }

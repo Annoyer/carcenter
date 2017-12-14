@@ -9,6 +9,16 @@ public class ParkingPlace {
     private Integer identifier;
     private Integer status;
 
+    private ParkingLot parkingLot;
+
+    public ParkingLot getParkingLot() {
+        return parkingLot;
+    }
+
+    public void setParkingLot(ParkingLot parkingLot) {
+        this.parkingLot = parkingLot;
+    }
+
     public Integer getId() {
         return id;
     }

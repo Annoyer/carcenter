@@ -5,8 +5,16 @@
         INSERT INTO car_order (car_id,hirer_id,price,renting_period_month,renting_period_week,renting_period_day,start_day,end_day,status,create_time)
         VALUES (#{carId},#{hirerId},#{price},#{rentingPeriodMonth},#{rentingPeriodWeek},#{rentingPeriodDay},#{startDay},#{endDay},#{status},#{createTime})
     </insert>
+    <update id="updateStatus">
+        UPDATE car_order
+        SET status=#{status}
+        WHERE id=#{orderId}
+    </update>
     <select id="selectCarOrderByCarIdAndTime" resultType="com.carcenter.model.CarOrder">
         SELECT id FROM car_order WHERE car_id=#{carId} AND (start_day BETWEEN '2000-01-01' AND #{end}
                                               or end_day BETWEEN #{start} AND '2200-12-31')
+    </select>
+    <select id="selectCarByOrderId" resultType="com.carcenter.model.Car">
+        SELECT * FROM car LEFT JOIN car_order ON car_order.car_id=car.id WHERE car_order.id=#{orderId}
     </select>
 </mapper>

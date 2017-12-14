@@ -79,4 +79,18 @@ public class ParkingController {
         }
         return mv;
     }
+
+    @RequestMapping(value = "/cancel")
+    @ResponseBody
+    public Result cancel(@RequestParam("orderId") int orderId){
+        Result result = new Result();
+        if (parkingService.cancelOrderByCustomer(orderId)){
+            result.setSuccess(true);
+        } else {
+            result.setSuccess(false);
+            result.setError("操作失败");
+        }
+
+        return result;
+    }
 }

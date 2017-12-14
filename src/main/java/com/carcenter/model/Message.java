@@ -13,6 +13,25 @@ public class Message {
     private Timestamp createTime;
     private Integer isRead;
 
+    private Customer from;
+    private Customer to;
+
+    public Customer getFrom() {
+        return from;
+    }
+
+    public void setFrom(Customer from) {
+        this.from = from;
+    }
+
+    public Customer getTo() {
+        return to;
+    }
+
+    public void setTo(Customer to) {
+        this.to = to;
+    }
+
     public Integer getId() {
         return id;
     }

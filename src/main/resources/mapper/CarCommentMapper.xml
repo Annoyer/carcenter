@@ -16,6 +16,10 @@
             </association>
         </association>
     </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO car_comment(car_order_id,content,create_time)
+        VALUES (#{carOrderId},#{content},#{createTime})
+    </insert>
 
     <select id="selectCommentByCarId" resultMap="commentMap">
         SELECT cc.id,cc.content,cc.create_time, cc.car_order_id,

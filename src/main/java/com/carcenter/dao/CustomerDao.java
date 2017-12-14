@@ -1,6 +1,9 @@
 package com.carcenter.dao;
 
+import com.carcenter.model.Car;
+import com.carcenter.model.CarOrder;
 import com.carcenter.model.Customer;
+import com.carcenter.model.ParkingOrder;
 
 import java.util.List;
 
@@ -9,13 +12,26 @@ import java.util.List;
  */
 public interface CustomerDao {
 
-    void save(Customer customer);
+    int save(Customer customer);
 
-    List<Customer> getCustomerByPhone(String phone);
+    int update(Customer customer);
 
-    List<Customer> getAllCustomers();
+    List<Customer> selectCustomerByPhone(String phone);
 
-    Customer getCustomerById(Integer id);
+    List<Customer> selectAllCustomers();
+
+    Customer selectCustomerById(Integer id);
+
+    List<Car> selectAvailableCarsByCustomer(Integer customerId);
+
+    List<Car> selectUsingCarsByCustomer(Integer customerId);
+
+    List<CarOrder> selectCarOrderByCustomer(Integer customerId);
+
+    List<CarOrder> selectCarOrderByOwner(Integer customerId);
+
+    List<ParkingOrder> selectParkingOrderByCustomer(Integer customerId);
+
 
 
 }

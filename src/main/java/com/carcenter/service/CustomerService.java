@@ -1,6 +1,9 @@
 package com.carcenter.service;
 
+import com.carcenter.model.Car;
+import com.carcenter.model.CarOrder;
 import com.carcenter.model.Customer;
+import com.carcenter.model.ParkingOrder;
 
 import java.util.List;
 
@@ -13,7 +16,20 @@ public interface CustomerService {
 
     Customer login(String phone, String password);
 
+    boolean modifyCustomerInfo(Customer customer);
+
     List<Customer> getAllCustomers();
 
     Customer getCustomerById(Integer id);
+
+    List<Car> getAvailableCarsByCustomer(Integer customerId);
+
+    List<Car> getUsingCarsByCustomer(Integer customerId);
+
+    List<CarOrder> getCarOrdersByCustomer(Integer customerId);
+
+    List<ParkingOrder> getParkingOrdersByCustomer(Integer customerId);
+
+    List<CarOrder> getCarOrdersByOwner(Integer customerId);
+
 }

@@ -1,5 +1,6 @@
 package com.carcenter.dao;
 
+import com.carcenter.model.Car;
 import com.carcenter.model.CarOrder;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,5 +12,9 @@ import java.util.List;
 public interface CarOrderDao {
     int save(CarOrder carOrder);
 
+    int updateStatus(@Param("orderId") int orderId, @Param("status") int status);
+
     List<CarOrder> selectCarOrderByCarIdAndTime(@Param("carId")Integer carId,@Param("start") String start, @Param("end")String end);
+
+    Car selectCarByOrderId(@Param("orderId") Integer orderId);
 }

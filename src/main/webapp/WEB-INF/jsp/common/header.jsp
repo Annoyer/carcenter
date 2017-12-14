@@ -23,8 +23,13 @@
                         <li><a href="${path}/parking/list">我要租车位</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <% if (customer==null){%>
                         <li><a href="${path}/register"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
                         <li><a href="${path}/login"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+                        <%} else {%>
+                        <li><a href="${path}/customer/my_info"><span class="glyphicon glyphicon-user"></span> 个人中心</a></li>
+                        <li><a href="${path}/customer/logout"><span class="glyphicon glyphicon-log-out"></span> 注销</a></li>
+                        <%} %>
                     </ul>
                 </div>
             </div>
@@ -40,5 +45,6 @@
     $(document).ready(function(){
         $(".navbar-header").css("line-height",$("nav.navbar").height()+"px");
     });
+
 </script>
 </html>

@@ -14,4 +14,5 @@ public interface ParkingService {
     ParkingLot getParkingLotById(Integer lotId);
     List<ParkingPlace> getAvailableParkingPlaceByLotAndTime(Integer lotId, String start, Integer length, String way);
     int makeOrder(Map<String, String[]> attrs);
+    boolean cancelOrderByCustomer(int orderId);
 }

@@ -44,6 +44,7 @@ footer > .container > .row > .footer_item{
     border: none;
     border-radius: 20px;
     background-color: #269abc;
+    padding: 5px 15px;
 }
 
 .btn-none{

@@ -1,7 +1,9 @@
 package com.carcenter.service.impl;
 
+import com.carcenter.dao.CarCommentDao;
 import com.carcenter.dao.CarDao;
 import com.carcenter.dao.CarOrderDao;
+import com.carcenter.model.CarComment;
 import com.carcenter.model.CarOrder;
 import com.carcenter.service.CarOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class CarOrderServiceImpl implements CarOrderService {
     CarOrderDao carOrderDao;
     @Autowired
     CarDao carDao;
+    @Autowired
+    CarCommentDao carCommentDao;
 
     public int makeOrder(Map<String, String[]> attrs) {
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -71,6 +75,27 @@ public class CarOrderServiceImpl implements CarOrderService {
         carOrderDao.save(order);
         carDao.updateStatusById(carId,2);
         return 0;
+    }
+
+    public boolean dealOrderByCarOwner(int orderId, boolean isAccpet) {
+        if (isAccpet){
+            return carOrderDao.updateStatus(orderId,0) > 0;
+        } else {
+            return carOrderDao.updateStatus(orderId,-3) > 0;
+        }
+    }
+
+    //-2是待管理员审核取消请求，审核通过后变-3，才是已取消的订单，审核不通过改回0
+    public boolean cancelOrderByCustomer(int orderId) {
+        return carOrderDao.updateStatus(orderId,-2) > 0;
+    }
+
+    public boolean makeComment(CarComment comment) {
+        comment.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        if (carCommentDao.insert(comment) > 0){
+            carOrderDao.updateStatus(comment.getCarOrderId(),4);//订单状态为已评价
+            return true;
+        } else return false;
     }
 
     private Date getEndDay(Date start,Integer diff,String way){

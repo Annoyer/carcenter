@@ -16,7 +16,7 @@ public class CarOrder {
     private Integer rentingPeriodDay;
     private Date startDay;
     private Date endDay;
-    private Integer status;//0未进行 1正在进行 2待进行 3历史订单
+    private Integer status;//-3车主拒绝订单 -2申请取消待审核 -1已取消 0待进行 1正在进行 2待车主确认 3历史订单
     private Timestamp createTime;
 
     private Customer customer;

@@ -8,19 +8,20 @@
     </insert>
     <update id="update">
         UPDATE car
-        SET
-        <if test="license!=''"> and license=#{license}</if>
-        <if test="brand!=''"> and brand=#{brand}</if>
-        <if test="brand_type!=''"> and brand_type=#{brandType}</if>
-        <if test="manufactureYear!=''"> and manufacture_year=#{manufactureYear}</if>
-        <if test="color!=''"> and color=#{color}</if>
-        <if test="passengerNum!=''"> and passenger_num=#{passengerNum}</if>
-        <if test="photo!=''"> and photo=#{photo}</if>
-        <if test="status!=''"> and status=#{status}</if>
-        <if test="price_day!=''"> and price_day=#{priceDay}</if>
-        <if test="price_week!=''"> and price_week=#{priceWeek}</if>
-        <if test="price_month!=''"> and price_month=#{priceMonth}</if>
-        <if test="city!=''"> and city=#{city}</if>
+        <trim prefix="set" suffixOverrides=",">
+            <if test="license!=''">license=#{license},</if>
+            <if test="brand!=''">brand=#{brand},</if>
+            <if test="brandType!=''">brand_type=#{brandType},</if>
+            <if test="manufactureYear!=''">manufacture_year=#{manufactureYear},</if>
+            <if test="color!=''">color=#{color},</if>
+            <if test="passengerNum!=''">passenger_num=#{passengerNum},</if>
+            <if test="photo!=''">photo=#{photo},</if>
+            <if test="status!=''">status=#{status},</if>
+            <if test="priceDay!=''">price_day=#{priceDay},</if>
+            <if test="priceWeek!=''">price_week=#{priceWeek},</if>
+            <if test="priceMonth!=''">price_month=#{priceMonth},</if>
+            <if test="city!=''">city=#{city},</if>
+        </trim>
         where id=#{id}
     </update>
     <update id="updateStatusById">

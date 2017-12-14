@@ -33,7 +33,7 @@
                     月租：${car.priceMonth}/月
                 </div>
                 <button class="btn-usual" onclick="javascript:location='${path}/carOrder/rent_in?carId='+${car.id}">马上预约</button>
-                <button class="btn-usual">联系车主</button>
+                <button class="btn-usual" onclick="sendMsg(${car.ownerId})">联系车主</button>
             </div>
         </div>
 
@@ -67,7 +67,9 @@
                 <table class="table">
                     <tbody id="commentListBody">
                     <c:forEach items="${comments}" var="c">
+                        <div onclick="sendMsg(${c.carOrder.customer.id})">
                         ${c.content}-${c.carOrder.id}-${c.carOrder.customer.name}
+                        </div>
                     </c:forEach>
 
                     <%--<tr>--%>
@@ -102,7 +104,14 @@
 </body>
 
 <script type="text/javascript">
+function sendMsg(toId) {
+    if (toId != <%=customer.getId()%>){
+        window.location.href = '${path}/message/send_message?toId='+toId;
+    } else {
+        window.location.href = '${path}/customer/my_info';
+    }
 
+}
 
 </script>
 </html>
