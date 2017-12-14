@@ -7,7 +7,7 @@
     </insert>
 
     <select id="getAllCustomers" resultType="com.carcenter.model.Customer">
-        SELECT * FROM customer
+        SELECT * FROM customer ORDER by id
     </select>
     <select id="getCustomerById" resultType="com.carcenter.model.Customer">
         SELECT * FROM customer WHERE #{id}=id
