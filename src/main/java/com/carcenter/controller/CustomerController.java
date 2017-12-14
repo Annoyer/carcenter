@@ -31,6 +31,12 @@ public class CustomerController {
         }
         return result;
     }
+    @RequestMapping(value = "/clients")
+    public ModelAndView toCustomer(){
+        ModelAndView mv = new ModelAndView("admin/clients");
+        mv.addObject("clients",customerService.getAllCustomers());
+        return mv;
+    }
 
     @RequestMapping(value = "/login")
     @ResponseBody
