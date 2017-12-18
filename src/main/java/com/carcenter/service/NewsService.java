@@ -1,13 +1,14 @@
-package com.carcenter.dao;
+package com.carcenter.service;
 
 import com.carcenter.model.News;
 
 import java.util.List;
+
 /**
- * Created by joy12 on 2017/12/3.
+ * Created by sts on 2017/12/15.
  */
-public interface NewsDao{
-    void save( News news);
+public interface NewsService {
+    boolean release(News news);
     List<News> getAllNews();
     List<News> getNewsByTitle(String title);
 }

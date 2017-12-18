@@ -48,13 +48,13 @@
 
 
                         </ul>
-                        <c:forEach items="clients" var="c">
-                            <div class="tab-content">
-                                <div id="tab-1" class="tab-pane active">
-                                    <div class="full-height-scroll">
-                                        <div class="table-responsive">
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active">
+                                <div class="full-height-scroll">
+                                    <div class="table-responsive">
                                             <table class="table table-striped table-hover">
                                                 <tbody>
+                                                <c:forEach items="${clients}" var="c">
                                                 <tr>
                                                     <td class="client-avatar"><img alt="image" src="${path}/static/img/${c.headimg}"> </td>
                                                     <td><a data-toggle="tab" href="#contact-1" class="client-link">${c.name}</a>
@@ -66,15 +66,13 @@
                                                     <td class="client-status"><span class="label label-primary">已验证</span>
                                                     </td>
                                                 </tr>
-
+                                                </c:forEach>
                                                 </tbody>
                                             </table>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </c:forEach>
-
+                        </div>
 
                     </div>
                 </div>

@@ -5,23 +5,19 @@
   Time: PM9:04
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@include file="../common/const.jsp" %>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
     <title>Admin</title>
 
-    <meta name="keywords" content="">
-    <meta name="description" content="">
 
-    <!--[if lt IE 8]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
 
-    <link rel="shortcut icon" href="favicon.ico">
+
     <link href="${path}/static/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
     <link href="${path}/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="${path}/static/css/animate.min.css" rel="stylesheet">
@@ -37,25 +33,14 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span>
+                        <span><img alt="image" class="img-circle" src="${path}/static/img/profile_small.jpg" /></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                <span class="block m-t-xs"><strong class="font-bold">Banjul</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                                <span class="text-muted text-xs block">超级管理员</span>
                                 </span>
                         </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
-                            </li>
-                            <li><a class="J_menuItem" href="profile.html">个人资料</a>
-                            </li>
 
-                            <li><a class="J_menuItem" href="mailbox.html">信箱</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">安全退出</a>
-                            </li>
-                        </ul>
                     </div>
                     <div class="logo-element">Admin
                     </div>
@@ -68,18 +53,17 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="clients.html" data-index="0">User query</a>
+                            <a class="J_menuItem" href="/admin/clients" data-index="0">User query</a>
                         </li>
                         <li>
-
-                            <a class="J_menuItem" href="add_user.html">Add user</a>
+                            <a class="J_menuItem" href="add_user">Add user</a>
                         </li>
-                        <li>
-                            <a class="J_menuItem" href="projects1.html">Drop user</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="projects2.html">Change password</a>
-                        </li>
+                        <%--<li>--%>
+                            <%--<a class="J_menuItem" href="function1()">Drop user</a>--%>
+                        <%--</li>--%>
+                        <%--<li>--%>
+                            <%--<a class="J_menuItem" href="function2()">Change password</a>--%>
+                        <%--</li>--%>
 
                     </ul>
 
@@ -93,10 +77,10 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="teams_board.html">Parking space</a>
+                            <a class="J_menuItem" href="admin/parking_space">Parking space</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="teams_board1.html">Check parking space</a>
+                            <a class="J_menuItem" href="admin/check_parking">Check parking space</a>
                         </li>
 
                     </ul>
@@ -104,9 +88,9 @@
                 <li>
                     <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Car management</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="contacts.html">Find car</a>
+                        <li><a class="J_menuItem" href="/admin/car">Find car</a>
                         </li>
-                        <li><a class="J_menuItem" href="contacts1.html">Car check</a>
+                        <li><a class="J_menuItem" href="admin/check_car">Car check</a>
                         </li>
 
                     </ul>
@@ -119,10 +103,10 @@
                             <a href="#">Car order <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li>
-                                    <a class="J_menuItem" href="fontawesome.html">Retrieval</a>
+                                    <a class="J_menuItem" href="admin/find_car_order">Retrieval</a>
                                 </li>
                                 <li>
-                                    <a class="J_menuItem" href="glyphicons.html">Checking</a>
+                                    <a class="J_menuItem" href="${path}/WEB-INF/jsp/admin/check_car_order.jsp">Checking</a>
                                 </li>
 
                             </ul>
@@ -131,10 +115,10 @@
                             <a href="#">Parking order <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
                                 <li>
-                                    <a class="J_menuItem" href="fontawesome1.html">Retrieval</a>
+                                    <a class="J_menuItem" href="admin/find_space_order">Retrieval</a>
                                 </li>
                                 <li>
-                                    <a class="J_menuItem" href="glyphicons.html">Checking</a>
+                                    <a class="J_menuItem" href="/admin/check_space_order">Checking</a>
                                 </li>
 
                             </ul>
@@ -142,9 +126,9 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Message</span><span class="label label-warning pull-right">16</span></a>
+                    <a href="${path}/WEB-INF/jsp/admin/mailbox.jsp"><i class="fa fa-envelope"></i> <span class="nav-label">Message</span><span class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="mailbox.html">Message management</a>
+                        <li><a class="J_menuItem" href="/admin/mailbox">Message management</a>
                         </li>
 
                     </ul>
@@ -152,14 +136,14 @@
                 <li>
                     <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">News</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="mail_compose.html">Release news</a>
+                        <li><a class="J_menuItem" href="release_news">Release news</a>
                         </li>
-                        <li><a class="J_menuItem" href="blog.html">Query news</a>
+                        <li><a class="J_menuItem" href="/admin/query_news">Query news</a>
                         </li>
-                        <li><a class="J_menuItem" href="rewrite.html">Rewrite news</a>
+                        <li><a class="J_menuItem" href="${path}/WEB-INF/jsp/admin/rewrite.jsp">Rewrite news</a>
                         </li>
-                        <li><a class="J_menuItem" href="del_news.html">Drop news</a>
-                        </li>
+                        <%--删除新闻 <li><a class="J_menuItem" href="${path}/WEB-INF/jsp/admin/del_news.jsp">Drop news</a>--%>
+                        <%--</li>--%>
 
 
 
@@ -179,7 +163,7 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                    <form role="search" class="navbar-form-custom" method="post" action="">
                         <div class="form-group">
                             <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
                         </div>
@@ -208,7 +192,7 @@
                             <li class="divider"></li>
                             <li>
                                 <div class="text-center link-block">
-                                    <a class="J_menuItem" href="mailbox.html">
+                                    <a class="J_menuItem" href="mailbox">
                                         <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
                                     </a>
                                 </div>
@@ -230,7 +214,7 @@
             </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                    <a href="javascript:;" class="active J_menuTab" data-id="index_v1">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
@@ -249,10 +233,10 @@
                     </li>
                 </ul>
             </div>
-            <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            <a href="admin_login" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v1.html?v=4.0" frameborder="0" data-id="index_v1.html" seamless></iframe>
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v1" frameborder="0" data-id="index_v1.html" seamless></iframe>
         </div>
         <div class="footer">
 

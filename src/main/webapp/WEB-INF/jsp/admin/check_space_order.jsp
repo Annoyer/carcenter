@@ -50,39 +50,42 @@
 
                                 <table class="table table-hover">
                                     <tbody>
-                                    <tr>
-                                        <td class="project-status">
-                                            <span class="label label-primary">id<!--从数据库中提取--></span>
-                                        </td>
-                                        <td class="project-title">
-                                            <h4>汽车ID</h4>
-                                            <br/>
-                                            <h4>车户ID</h4>
-                                        </td>
-                                        <td class="project-completion">
-                                            <h4>价格</h4>
+                                    <c:forEach items="spaceneedcheck" var="snc">
+                                        <tr>
+                                            <td class="project-status">
+                                                <span class="label label-primary">${snc.id}</span>
+                                            </td>
+                                            <td class="project-title">
+                                                <h4>${snc.}</h4>
+                                                <br/>
+                                                <h4>车户ID</h4>
+                                            </td>
+                                            <td class="project-completion">
+                                                <h4>价格</h4>
 
-                                        </td>
-                                        <td class="order-time">
-                                            <h4>月租</h4>
+                                            </td>
+                                            <td class="order-time">
+                                                <h4>月租</h4>
 
-                                        </td>
-                                        <td class="order-start">
-                                            <h4>开始时间</h4>
+                                            </td>
+                                            <td class="order-start">
+                                                <h4>开始时间</h4>
 
-                                        </td>
-                                        <td class="order-status">
-                                            <h4>状态</h4>
+                                            </td>
+                                            <td class="order-status">
+                                                <h4>状态</h4>
 
-                                        </td>
-                                        <td class="order-starts">
-                                            <h4>订单创建时间</h4>
+                                            </td>
+                                            <td class="order-starts">
+                                                <h4>订单创建时间</h4>
 
-                                        </td>
-                                        <td class="orders-status">
-                                            <span class="label label-primary">通过审核</span>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td class="orders-status">
+                                                <button class="label label-primary">通过审核</button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+
                                     </tbody>
                                 </table>
                             </div>
