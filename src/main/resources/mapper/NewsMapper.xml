@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.carcenter.dao.NewsDao">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.carcenter.model.News">
+        insert into carcenter.news (title,content,photo,create_time) values (#{title},#{content},#{photo},#{createTime} )
+    </insert>
+
+    <select id="getAllNews" resultType="com.carcenter.model.News">
+        SELECT * FROM carcenter.news ORDER BY create_time DESC
+    </select>
+    <select id="getNewsByTitle" resultType="com.carcenter.model.News">
+        SELECT * FROM carcenter.news WHERE #{title}=title
+    </select>
+    <select id="selectNewsById" resultType="com.carcenter.model.News">
+        SELECT * FROM carcenter.news WHERE id=#{newsId}
+    </select>
+    <delete id="delete">
+        DELETE FROM carcenter.news WHERE id=#{newsId}
+    </delete>
 </mapper>

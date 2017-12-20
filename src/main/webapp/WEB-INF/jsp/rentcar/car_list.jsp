@@ -172,8 +172,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="align_right">
-                        <input class="btn btn_submit" type="submit">
+                    <div class="offset-20 text-center">
+                        <input class="btn-md-my btn-order" type="submit">
                     </div>
                 </form>
             </div>
@@ -190,7 +190,7 @@
         </ul>
     </div>
 
-    <div class="offset-80">
+    <div class="offset-10">
         <ul id="listContainer" class="container list-vertical-container">
             <c:forEach items="${cars}" var="c">
                 <li class="row list-vertical-item">
@@ -205,13 +205,13 @@
 
                     <div class="col-xs-4 col-md-4">
                         <div class="car-title">
-                            ${c.brand}-${c.brandType}
+                            ${c.brand}&nbsp;-&nbsp;${c.brandType}
                         </div>
                         <div class="car-brief">
                                 ${c.passengerNum}人座
                         </div>
                         <div class="car-brief">
-                                ${c.city}
+                                提车地：${c.city}
                         </div>
                         <div class="car-brief">
                                 ${c.manufactureYear}年产
@@ -227,7 +227,7 @@
                         <div class="car-price">
                             月租：${c.priceMonth}/月
                         </div>
-                        <button class="btn-usual">预约</button>
+                        <button class="btn-usual btn-list">预约</button>
                     </div>
                 </li>
             </c:forEach>
@@ -305,18 +305,22 @@
             var end = (start + pageSize) <= (itemList.length) ? (start + pageSize) : (itemList.length);
             for (var i = start; i < end; i++) {
                 parent.append('<li class="row list-vertical-item">' +
-                    '<img class="col-xs-4 col-md-4" src="${path}/' + itemList[i].photo + '" alt="无法显示"> ' +
-                    '<div class="col-xs-4 col-md-4">' +
-                    '<div class="car-title">' + itemList[i].brand+'-'+itemList[i].brandType + '</div>' +
-                    '<div class="car-brief">'+itemList[i].passengerNum+'人座</div>' +
+                    '<div class="col-xs-3 col-md-3">' +
+                    '<img class="car-img-lg" src="${path}/' + itemList[i].photo + '" alt="无法显示"> ' +
+                    '</div>'+
+                    '<div class="col-xs-4 col-md-4" style="padding:15px;">' +
+                    '<div class="car-title">' + itemList[i].brand+'&nbsp;-&nbsp;'+itemList[i].brandType + '</div>' +
+                    '<div class="car-brief">'+itemList[i].manufactureYear+'年产&nbsp;&nbsp;'+itemList[i].passengerNum+'人座</div>' +
                     '<div class="car-brief">'+itemList[i].city+'</div>' +
-                    '<div class="car-brief">'+itemList[i].manufactureYear+'年产</div>' +
+                 //   '<div class="car-brief">'+itemList[i].manufactureYear+'年产</div>' +
                     '</div>' +
-                    '<div class="col-xs-4 col-md-4">' +
-                    '<div class="car-price-lg">日租：'+itemList[i].priceDay+'/日 </div> ' +
-                    '<div class="car-price">周租：'+itemList[i].priceWeek+'/周 </div> ' +
-                    '<div class="car-price">月租：'+itemList[i].priceMonth+'/月</div>' +
-                    '<button class="btn-usual" onclick="javascript:location=\'${path}/car/single?id='+itemList[i].id+'\'">预约</button>' +
+                    '<div class="col-xs-3 col-md-3" style="padding:15px;">' +
+                    '<div class="car-price-label">日租：<span class="car-price-lg">￥'+itemList[i].priceDay+'</span>/日 </div> ' +
+                    '<div class="car-price-label">周租：<span class="car-price">￥'+itemList[i].priceWeek+'</span>/周 </div> ' +
+                    '<div class="car-price-label">月租：<span class="car-price">￥'+itemList[i].priceMonth+'</span>/月</div>' +
+                    '</div>' +
+                    '<div class="col-xs-2 col-md-2 container-flex-horizontal-center container-flex-vertical-center" style="padding:30px;">'+
+                    '<button class="btn-order" onclick="javascript:location=\'${path}/car/single?id='+itemList[i].id+'\'">预约</button>' +
                     '</div>' +
                     '</li>');
             }

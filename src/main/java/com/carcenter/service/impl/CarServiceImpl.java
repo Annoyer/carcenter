@@ -62,7 +62,7 @@ public class CarServiceImpl implements CarService{
                     format.put("priceDayMax",max);
                 }
             } else {
-                if (e.getValue()!=null && !e.getValue()[0].equals("不限")){
+                if (e.getValue()!=null && !e.getValue()[0].equals("不限") && !e.getValue()[0].equals("")){
                     format.put(e.getKey(),e.getValue()[0]);
                 }
             }
@@ -98,9 +98,18 @@ public class CarServiceImpl implements CarService{
         return carDao.delete(id) > 0;
     }
 
+    public boolean checkCar(int id) {
+        return carDao.updateStatusById(id,0) > 0;
+    }
+
     public boolean modifyCar(Car car) {
         if(carDao.selectCarById(car.getId()).getStatus()!=0)
             return false;
         return carDao.update(car) > 0;
     }
+
+
+    public List<Car> getCarsNeedCheck() {    return carDao.getCarsNeedCheck();}
+
+
 }

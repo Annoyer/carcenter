@@ -15,6 +15,10 @@
 <div class="offset-80">
     <div class="offset-50 container container-center">
         <div class="row">
+            <h2 class="col-md-3 text-center">个人中心</h2>
+            <hr class="col-md-12"/>
+        </div>
+        <div class="row">
             <div class="infotab col-md-3">
                 <ul class="nav2 nav-pills nav-stacked">
                     <li><a href="${path}/customer/my_info">我的基本信息</a></li>
@@ -40,30 +44,16 @@
 
                             <div class="col-xs-3 col-md-3">
                                 <div class="car-title">
-                                        ${o.car.brand}-${o.car.brandType}
+                                        ${o.car.brand}&nbsp;-&nbsp;${o.car.brandType}
                                 </div>
                                 <div class="car-brief">
                                         ${o.car.passengerNum}人座
                                 </div>
-                                <div class="car-brief">
-                                        ${o.car.city}
-                                </div>
-                            </div>
-                            <div class="col-xs-3 col-md-3">
-                                <div class="car-price-lg">
-                                    租金：${o.price}
-                                </div>
-                                <div class="car-price">
-                                    提车日期：<fmt:formatDate pattern="yyyy-MM-dd" value="${o.startDay}" />
-                                </div>
-                                <div class="car-price">
-                                    还车日期：<fmt:formatDate pattern="yyyy-MM-dd" value="${o.endDay}" />
-                                </div>
-                                <div class="car-price">
+                                <div class="order-status">
                                     订单状态：
                                     <c:choose>
                                         <c:when test="${o.status==-3}">
-                                            车主拒绝该订单
+                                            车主拒绝订单
                                         </c:when>
                                         <c:when test="${o.status==-2}">
                                             取消审核中
@@ -93,12 +83,26 @@
                                 </div>
                             </div>
                             <div class="col-xs-3 col-md-3">
+                                <div class="car-brief">
+                                    提车地：${o.car.city}
+                                </div>
+                                <div class="car-brief">
+                                    提车日期：<fmt:formatDate pattern="yyyy-MM-dd" value="${o.startDay}" />
+                                </div>
+                                <div class="car-brief">
+                                    还车日期：<fmt:formatDate pattern="yyyy-MM-dd" value="${o.endDay}" />
+                                </div>
+                            </div>
+                            <div class="col-xs-3 col-md-3">
+                                <div class="car-price-lg">
+                                    ￥${o.price}
+                                </div>
                                 <c:choose>
                                     <c:when test="${o.status==3}">
-                                        <button class="btn-usual" onclick="toComment(${o.id})">评价</button>
+                                        <button class="btn-square btn-list" onclick="toComment(${o.id})">评价</button>
                                     </c:when>
                                     <c:when test="${o.status==0}">
-                                        <button class="btn-usual" onclick="cancelOrder(${o.id})">取消订单</button>
+                                        <button class="btn-square btn-list" onclick="cancelOrder(${o.id})">取消订单</button>
                                     </c:when>
                                 </c:choose>
                             </div>

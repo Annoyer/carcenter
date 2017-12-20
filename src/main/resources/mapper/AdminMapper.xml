@@ -3,7 +3,7 @@
 <mapper namespace="com.carcenter.dao.AdminDao">
 
     <select id="getAdminByNameAndPassword" resultType="com.carcenter.model.Admin" parameterType="String">
-        SELECT * FROM customer WHERE #{name}=adminName and #{password}=password
+        SELECT * FROM admin WHERE #{name}=name and #{password}=password
     </select>
 
 </mapper>

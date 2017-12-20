@@ -7,7 +7,7 @@
     </select>
     <select id="selectAvailableParkingPlaceByLotAndTime" resultType="com.carcenter.model.ParkingPlace">
         SELECT * FROM parking_place p LEFT JOIN parking_order o ON p.id=o.parking_place_id LEFT JOIN parking_lot l ON p.parking_lot_id=l.id
-        WHERE l.id=1 AND
+        WHERE l.id=#{lotId} AND
         (p.status=0
 				OR (p.status=1 AND o.end_day BETWEEN '2000-01-01' AND #{start})
 				OR (p.status=2 AND
@@ -20,4 +20,18 @@
     <select id="selectParkingLotById" resultType="com.carcenter.model.ParkingLot">
         SELECT * FROM parking_lot WHERE id=#{id}
     </select>
+    <select id="selectParkingLotByAttr" resultType="com.carcenter.model.ParkingLot">
+        SELECT * FROM parking_lot WHERE name LIKE CONCAT('%',#{value},'%') or address LIKE CONCAT('%',#{value},'%')
+    </select>
+
+    <select id="selectParkingLotByName" resultType="com.carcenter.model.ParkingLot">
+        SELECT * FROM parking_lot WHERE name=#{name}
+    </select>
+
+    <delete id="delete" >
+        DELETE FROM carcenter.parking_lot WHERE id=#{lotId}
+    </delete>
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.carcenter.model.ParkingLot">
+        insert into carcenter.parking_lot (name,address ,volumn,current_num,price_month,price_day ) values (#{name},#{address},#{volumn},0,#{priceMonth},#{priceDay});
+    </insert>
 </mapper>

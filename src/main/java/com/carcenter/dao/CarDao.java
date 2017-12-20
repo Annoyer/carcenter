@@ -2,6 +2,7 @@ package com.carcenter.dao;
 
 import com.carcenter.model.Car;
 import com.carcenter.model.CarComment;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -23,5 +24,8 @@ public interface CarDao {
     int delete(Integer id);
     int update(Car car);
 
-    int updateStatusById(Integer id,Integer status);
+    int updateStatusById(@Param("id") Integer id,@Param("status") Integer status);
+
+
+    List<Car> getCarsNeedCheck();
 }

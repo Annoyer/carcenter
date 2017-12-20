@@ -13,4 +13,6 @@ public interface MessageDao {
     List<Message> selectMessageByToId(@Param("toId") int toId);
     int save(Message message);
     int setIsRead(@Param("id") int id,@Param("isRead") int isRead);
+
+    List<Message> selectAllMessage();
 }

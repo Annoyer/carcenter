@@ -17,4 +17,13 @@ public interface CarOrderDao {
     List<CarOrder> selectCarOrderByCarIdAndTime(@Param("carId")Integer carId,@Param("start") String start, @Param("end")String end);
 
     Car selectCarByOrderId(@Param("orderId") Integer orderId);
+
+    List<CarOrder> selectAccessiableCarOrderByCarId(@Param("carId") int carId);
+
+    List<CarOrder> getAllCarOrder();
+
+    List<CarOrder> startCarOrder();
+
+    List<CarOrder> endCarOrder();
+
 }

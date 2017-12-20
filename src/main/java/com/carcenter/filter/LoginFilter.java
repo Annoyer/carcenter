@@ -24,9 +24,17 @@ public class LoginFilter implements Filter {
         pattenURL.add("css");
         pattenURL.add("js");
         pattenURL.add("img");
+        pattenURL.add("jpg");
+        pattenURL.add("png");
+        pattenURL.add(".woff");
+        pattenURL.add(".woff2");
+        pattenURL.add(".ttf");
+        pattenURL.add(".svg");
+        pattenURL.add(".eot");
 
         pattenURL.add("index");
         pattenURL.add("list");
+        pattenURL.add("admin");
         pattenURL.add("car/select");
 
     }

@@ -9,7 +9,16 @@ public class News {
     private Integer id;
     private String title;
     private String content;
+    private String photo;
     private Timestamp createTime;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public Integer getId() {
         return id;

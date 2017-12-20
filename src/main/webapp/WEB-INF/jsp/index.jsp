@@ -6,11 +6,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>首页</title>
+    <link rel="stylesheet" type="text/css" href="${path}/static/css/animate.min.css">
     <link rel="stylesheet" type="text/css" href="${path}/static/css/jcy.css">
     <style type="text/css">
         .indeximg{
             width: 100%;
             height: 672px;
+        }
+
+        .newsItem{
+            border: 1px solid #e7eaec;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
         }
 
     </style>
@@ -55,15 +63,43 @@
     <div class="container-center">
         <hr class="my-hr">
     </div>
-    <div id="newsImgs" class="imgs_wrap_4">
-        <a href="#"><img class="item_img_4" src="${path}/static/img/car1.jpg"/></a>
-        <a href="#"><img class="item_img_4" src="${path}/static/img/car1.jpg"/></a>
-        <a href="#"><img class="item_img_4" src="${path}/static/img/car1.jpg"/></a>
-        <a href="#"><img class="item_img_4" src="${path}/static/img/car1.jpg"/></a>
-        <a href="#"><img class="item_img_4" src="${path}/static/img/car1.jpg"/></a>
-        <a href="#"><img class="item_img_4" src="${path}/static/img/car1.jpg"/></a>
-        <a href="#"><img class="item_img_4" src="${path}/static/img/car1.jpg"/></a>
-        <a href="#"><img class="item_img_4" src="${path}/static/img/car1.jpg"/></a>
+    <div id="newsImgs" class="container">
+        <c:choose>
+            <c:when test="${fn:length(news)>9}">
+                <c:forEach items="${news}" var="n" end="9" varStatus="i">
+                <c:if test="${(i.index+1)%3 == 1}">
+                <div class="row">
+                </c:if>
+                    <div class="col-md-4" style="padding: 15px;">
+                        <div class="newsItem" onclick="javascript:window.location.href='${path}/news?newsId=${n.id}'">
+                            <img class="item_img_4" src="${path}/${n.photo}"/>
+                            <h4>${n.title}</h4>
+                        </div>
+                    </div>
+                    <c:if test="${(i.index+1)%3 == 0}">
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <c:forEach items="${news}" var="n" varStatus="i">
+                    <c:if test="${(i.index+1)%3 == 1}">
+                        <div class="row">
+                    </c:if>
+                    <div class="col-md-4" style="padding: 15px;">
+                        <div class="newsItem" onclick="javascript:window.location.href='${path}/news?newsId=${n.id}'">
+                            <img class="item_img_4" src="${path}/${n.photo}"/>
+                            <h4>${n.title}</h4>
+                        </div>
+                    </div>
+                    <c:if test="${(i.index+1)%3 == 0 || i.last}">
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
+
+        </div>
     </div>
 </div>
 
@@ -71,10 +107,13 @@
 <jsp:include page="common/footer.jsp"></jsp:include>
 </body>
 
-
+<script src="${path}/static/js/content.min.js?v=1.0.0"></script>
 <script type="text/javascript">
 
     $(document).ready(function(){
+        $(".newsItem").each(function(){
+            animationHover(this,"pulse")
+        })
     });
 </script>
 </html>

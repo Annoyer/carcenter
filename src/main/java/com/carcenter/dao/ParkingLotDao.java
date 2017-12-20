@@ -14,4 +14,9 @@ public interface ParkingLotDao {
     List<ParkingLot> selectAllParkingLot();
     List<ParkingPlace> selectAvailableParkingPlaceByLotAndTime(@Param("lotId") Integer lotId, @Param("start") String start, @Param("end") String end);
     ParkingLot selectParkingLotById(Integer id);
+    List<ParkingLot> selectParkingLotByName(@Param("name") String name);
+    List<ParkingLot> selectParkingLotByAttr(@Param("value") String value);
+    int save( ParkingLot parkingLot);
+    int delete(@Param("lotId") int lotId);
+
 }

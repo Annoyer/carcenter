@@ -17,24 +17,30 @@
 <div class="offset-80">
     <form class="page_content offset_60" action="${path}/parking/makeParkingOrder" method="post">
         <input hidden name="hirerId" value="<%=customer.getId()%>">
-        <div class="text_title">订单</div>
-
-        <div class="offset_80">
-            <hr class="my_hr_long"/>
-            <div class="offset_60">
-                <div class="item_img_wrapper_sm background_100 display_inlineblock display_verticalalign_top" id="itemImgsm" style="background: url(${path}/${car.photo}) no-repeat; background-size:100% 100%;">
-                </div>
-                <div class="display_inlineblock display_verticalalign_top margin_left_right_40">
-                    <div class="text_title margin_left_right_40">${parkingLot.name}</div>
-                    <div class="text_title margin_left_right_40">${parkingLot.address}</div>
-                    <div class="offset_80">
-                        <h5 class="margin_left_right_40">价格</h5>
-                        <div class="offset_40">
-                            <div class="car-price-lg">
-                                日租：${parkingLot.priceDay}/日
-                            </div>
-                            <div class="car-price-lg">
-                                月租：${parkingLot.priceMonth}/月
+        <div class="form-title">订单</div>
+        <div class="offset-30">
+            <hr/>
+            <div class="offset-30 container">
+                <div class="row">
+                    <div class="col-xs-8 col-md-8">
+                        <div class="text_title margin_left_right_40 col-xs-12 col-md-12">${parkingLot.name}</div>
+                        <div class="text_title margin_left_right_40 col-xs-12 col-md-12 offset-20" id="itemName">${parkingLot.address}</div>
+                        <div class="offset_80">
+                            <div class="margin_left_right_40" style="font-size: 18px;">
+                                <div class="offset-20 col-xs-12 col-md-12">
+                                    日租：
+                                    <span class="car-price-lg">
+                            ￥${parkingLot.priceDay}
+                        </span>
+                                    /日
+                                </div>
+                                <div class="offset-20 col-xs-12 col-md-12">
+                                    月租：
+                                    <span class="car-price-lg">
+                            ￥${parkingLot.priceMonth}
+                        </span>
+                                    /月
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -55,14 +61,12 @@
                     <input type="radio" name="rentway" value="month">月租
                 </label>
             </div>
-            <div class="offset_40" id="dayChoose">
+            <div class="offset_40" id="dayChoose" style="margin-left: 30px;">
                 起始日期：<input type="text" name="dayStart" id="dayStart">
-                结束日期：<input type="text" name="dayEnd" id="dayEnd" readonly>
                 天数：<input type="number" name="dayLen" id="dayLen" min="1" value="1">
             </div>
-            <div class="offset_40" id="monthChoose"style="display: none">
+            <div class="offset_40" id="monthChoose"style="display: none; margin-left: 30px;">
                 起始日期：<input type="text" name="monthStart" id="monthStart">
-                结束日期：<input type="text" name="monthEnd" id="monthEnd" readonly>
                 月数：<input type="number" name="monthLen" id="monthLen" min="1" value="1">
             </div>
         </div>
@@ -71,8 +75,8 @@
             <div class="offset_bottom_-10">
                 <div class="text_title_xs_normal display_inlineblock">车位选择</div>
             </div>
-            <hr class="my_hr_long"/>
-            <div class="offset_40">
+            <hr/>
+            <div class="offset_40" style="margin-left: 30px;">
                 <select id="placeSelector" name="parkingPlaceId" disabled></select>
             </div>
         </div>

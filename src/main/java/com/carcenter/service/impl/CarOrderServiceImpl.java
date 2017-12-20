@@ -3,8 +3,10 @@ package com.carcenter.service.impl;
 import com.carcenter.dao.CarCommentDao;
 import com.carcenter.dao.CarDao;
 import com.carcenter.dao.CarOrderDao;
+import com.carcenter.model.Car;
 import com.carcenter.model.CarComment;
 import com.carcenter.model.CarOrder;
+import com.carcenter.model.ParkingOrder;
 import com.carcenter.service.CarOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +39,7 @@ public class CarOrderServiceImpl implements CarOrderService {
         order.setCarId(carId);
         order.setHirerId(Integer.parseInt(attrs.get("hirerId")[0]));
         order.setPrice(Double.parseDouble(attrs.get("price")[0]));
-        order.setStatus(0);
+        order.setStatus(2);//等待车主接单
         Date start = null,end = null;
         Integer len = 0;
         try {
@@ -85,9 +87,14 @@ public class CarOrderServiceImpl implements CarOrderService {
         }
     }
 
-    //-2是待管理员审核取消请求，审核通过后变-3，才是已取消的订单，审核不通过改回0
+    //改成：-1 已取消
     public boolean cancelOrderByCustomer(int orderId) {
-        return carOrderDao.updateStatus(orderId,-2) > 0;
+        boolean result = carOrderDao.updateStatus(orderId,-1) > 0;
+        if (result){
+            Car car = carOrderDao.selectCarByOrderId(orderId);
+            correctStatus(car.getId());
+        }
+        return result;
     }
 
     public boolean makeComment(CarComment comment) {
@@ -96,6 +103,28 @@ public class CarOrderServiceImpl implements CarOrderService {
             carOrderDao.updateStatus(comment.getCarOrderId(),4);//订单状态为已评价
             return true;
         } else return false;
+    }
+
+    public boolean startOrderByAdmin(int orderId) {
+        //订单状态变为正在进行
+        boolean result = carOrderDao.updateStatus(orderId,1) > 0;
+        if (result){
+            //车辆状态变为已租
+            carDao.updateStatusById(carOrderDao.selectCarByOrderId(orderId).getId(),1);
+        }
+
+        return result;
+    }
+
+    public boolean endOrderByAdmin(int orderId) {
+        //订单状态变为历史订单
+        boolean result = carOrderDao.updateStatus(orderId,3) > 0;
+        if (result){
+            Car car = carOrderDao.selectCarByOrderId(orderId);
+            correctStatus(car.getId());
+        }
+
+        return result;
     }
 
     private Date getEndDay(Date start,Integer diff,String way){
@@ -120,4 +149,28 @@ public class CarOrderServiceImpl implements CarOrderService {
             return true;
         }
     }
+
+    private void correctStatus(int carId){
+        List<CarOrder> orders = carOrderDao.selectAccessiableCarOrderByCarId(carId);
+        if (orders==null || orders.size()==0){
+            carDao.updateStatusById(carId,0);
+        } else {
+            carDao.updateStatusById(carId,2);
+        }
+    }
+
+
+    public List<CarOrder> getAllCarOrder() {
+        return carOrderDao.getAllCarOrder();
+    }
+
+    public List<CarOrder> startCarOrder() {
+        return carOrderDao.startCarOrder();
+    }
+
+    public List<CarOrder> endCarOrder() {
+        return carOrderDao.endCarOrder();
+    }
+
+
 }

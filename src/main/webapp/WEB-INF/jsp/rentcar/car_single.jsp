@@ -17,23 +17,45 @@
 <!--页面内容-->
 <div class="offset-80">
     <div class="container page_content offset-80">
-        <div class="row text_title" id="itemId">${car.brand}-${car.brandType}</div>
         <div class="row">
             <div class="col-xs-8 col-md-8 item_img_wrapper_lg">
                 <img class="img_fill" id="itemImgLg" src="${path}/${car.photo}"/>
             </div>
-            <div class="col-xs-4 col-md-4">
-                <div class="car-price-lg">
-                    日租：${car.priceDay}/日
+            <div class="offset-50 col-xs-4 col-md-4">
+                <div class="row text_title" id="itemId">${car.brand}-${car.brandType}</div>
+                <div class="row" style="font-size: 18px;">
+                    <div class="offset-20 col-xs-12 col-md-12">
+                        日租：
+                        <span class="car-price-lg">
+                            ￥${car.priceDay}
+                        </span>
+                        /日
+                    </div>
+                    <div class="offset-20 col-xs-12 col-md-12">
+                        周租：
+                        <span class="car-price-lg">
+                            ￥${car.priceWeek}
+                        </span>
+                        /周
+                    </div>
+                    <div class="offset-20 col-xs-12 col-md-12">
+                        月租：
+                        <span class="car-price-lg">
+                            ￥${car.priceMonth}
+                        </span>
+                        /月
+                    </div>
                 </div>
-                <div class="car-price-lg">
-                    周租：${car.priceWeek}/周
+                <div class="row offset-30">
+                    <div class="col-xs-5 col-md-5" style="padding-right: 0px;">
+                        <button class="btn-square btn-md-my" onclick="javascript:location='${path}/carOrder/rent_in?carId='+${car.id}">马上预约</button>
+                    </div>
+                    <div class="col-xs-5 col-md-5" style="padding-left: 0px;">
+                        <button class="btn-square btn-md-my" onclick="sendMsg(${car.ownerId})">联系车主</button>
+                    </div>
+                    <div class="col-xs-2 col-md-2"></div>
                 </div>
-                <div class="car-price-lg">
-                    月租：${car.priceMonth}/月
-                </div>
-                <button class="btn-usual" onclick="javascript:location='${path}/carOrder/rent_in?carId='+${car.id}">马上预约</button>
-                <button class="btn-usual" onclick="sendMsg(${car.ownerId})">联系车主</button>
+
             </div>
         </div>
 
@@ -57,32 +79,33 @@
                     </tbody>
                 </table>
             </div>
-            <hr class="my_hr_long"/>
+            <hr/>
         </div>
 
 
         <div class="offset_60">
             <div class="text_title_sm">评价</div>
-            <div>
-                <table class="table">
-                    <tbody id="commentListBody">
-                    <c:forEach items="${comments}" var="c">
-                        <div onclick="sendMsg(${c.carOrder.customer.id})">
-                        ${c.content}-${c.carOrder.id}-${c.carOrder.customer.name}
+            <hr/>
+            <div class="offset-20">
+                <div class="container" id="commentListBody">
+                <c:forEach items="${comments}" var="c">
+                    <div class="row">
+                        <div class="col-xs-1 col-md-1">
+                            <img style="width: 100%;" src="${path}/static/img/user.svg" onclick="sendMsg(${c.carOrder.customer.id})"/>
                         </div>
-                    </c:forEach>
+                        <div class="col-xs-11 col-md-11 text-left">
+                            <div class="user-name" onclick="sendMsg(${c.carOrder.customer.id})">
+                                    ${c.carOrder.customer.name}
+                            </div>
+                            <div class="msg-content">${c.content}</div>
+                            <div class="time"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${c.createTime}" /></div>
+                        </div>
+                    </div>
+                    <hr/>
+                </c:forEach>
+                </div>
+            </div>
 
-                    <%--<tr>--%>
-                    <%--<td class="comment_wrapper">--%>
-                    <%--<div class="comment_user_name">相叶雅纪</div>--%>
-                    <%--<div class="comment_content">hhhhhhhhhhhhhhhhh哈哈哈哈哈或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或、hhhhh哈哈哈哈哈哈哈哈哈哈哈</div>--%>
-                    <%--<div class="comment_timestamp">2016-12-25 16:00:00</div>--%>
-                    <%--</td>--%>
-                    <%--</tr>--%>
-
-                    </tbody>
-                </table>
-                <hr class="my_hr_long"/>
                 <div class="display_center">
                     <ul id="commentNavbar" class="pagination pagination-sm">
                         <%--<li><a href="#">&laquo;</a></li>--%>

@@ -40,4 +40,8 @@ public class MessageServiceImpl implements MessageService {
             messageDao.setIsRead(msgId,status);
         }
     }
+
+    public List<Message> getAllMsg() {
+        return messageDao.selectAllMessage();
+    }
 }

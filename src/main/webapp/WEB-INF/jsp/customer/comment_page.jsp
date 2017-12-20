@@ -24,8 +24,8 @@
     <div class="container container-center" style="width: 100%">
         <form id="msgForm" class="offset-30" action="${path}/carOrder/comment" method="post">
             <input hidden name="carOrderId" value="${carOrderId}">
-            <div class="row container-center">
-                <textarea style="width: 85%; height: 200px;" name="content" ></textarea>
+            <div class="row container-flex-horizontal-center">
+                <textarea class="form-control" style="width: 85%; height: 200px;" name="content" ></textarea>
             </div>
             <div class="offset-20 row container-center">
                 <input type="submit" class="btn-usual"/>

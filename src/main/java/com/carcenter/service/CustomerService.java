@@ -32,4 +32,9 @@ public interface CustomerService {
 
     List<CarOrder> getCarOrdersByOwner(Integer customerId);
 
+
+    List<Customer> getCustomerByAttribute(String value);
+    boolean deleteCustomer(int customerId);
+
+
 }

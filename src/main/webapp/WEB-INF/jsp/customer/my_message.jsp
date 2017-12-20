@@ -13,7 +13,11 @@
 <!-- Page Header -->
 <jsp:include page="../common/header.jsp"></jsp:include>
 <div class="offset-80">
-    <div class="offset-50 container container-center">
+    <div class="offset-30 container container-center">
+        <div class="row">
+            <h2 class="col-md-3 text-center">个人中心</h2>
+            <hr class="col-md-12"/>
+        </div>
         <div class="row">
             <div class="infotab col-md-3">
                 <ul class="nav2 nav-pills nav-stacked">
@@ -27,35 +31,42 @@
             </div>
             <div class="container-center col-md-9">
                 <div class="row">
-                    <div class="col-md-3">
-                        <button class="btn-usual" onclick="setAllMsgStatus(1)">全部已读</button>
+                    <div class="col-md-2">
+                        <button class="btn-square" onclick="setAllMsgStatus(1)">全部已读</button>
                     </div>
-                    <div class="col-md-3">
-                        <button class="btn-usual" onclick="setAllMsgStatus(0)">全部未读</button>
+                    <div class="col-md-2" style="margin-left: -50px">
+                        <button class="btn-square" onclick="setAllMsgStatus(0)">全部未读</button>
                     </div>
                 </div>
                 <ul id="listContainer" class="container list-vertical-container offset-20">
                     <c:forEach items="${msgs}" var="m">
-                        <li class="row list-vertical-item">
-                            <div class="col-xs-3 col-md-3">
+                        <c:choose>
+                        <c:when test="${m.isRead==1}">
+                            <li class="row list-vertical-item" style="border-color: #e7eaec;">
+                        </c:when>
+                        <c:otherwise>
+                            <li class="row list-vertical-item">
+                        </c:otherwise>
+                        </c:choose>
+                            <div class="col-xs-2 col-md-2">
                                 ${m.from.name}
                             </div>
-                            <div class="col-xs-6 col-md-6">
-                                ${m.content}
+                            <div class="col-xs-8 col-md-8 text-left">
+                                <div class="msg-content">${m.content}</div>
+                                <div class="time">
+                                    <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${m.createTime}" />
+                                </div>
                             </div>
-                            <div class="col-xs-3 col-md-3">
+                            <div class="col-xs-2 col-md-2">
                                 <c:choose>
                                     <c:when test="${m.isRead==0}">
-                                        <button class="btn-usual" onclick="setMsgStatus(${m.id},1)">设为已读</button>
+                                        <button class="btn-square btn-sm-my" onclick="setMsgStatus(${m.id},1)">设为已读</button>
                                     </c:when>
                                     <c:when test="${m.isRead==1}">
-                                        <button class="btn-usual" onclick="setMsgStatus(${m.id},0)">设为未读</button>
+                                        <button class="btn-square btn-sm-my" onclick="setMsgStatus(${m.id},0)">设为未读</button>
                                     </c:when>
                                 </c:choose>
 
-                            </div>
-                            <div class="col-xs-3 col-md-3">
-                                <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${m.createTime}" />
                             </div>
                         </li>
                     </c:forEach>

@@ -1,7 +1,9 @@
 package com.carcenter.service;
 
 import com.carcenter.model.CarComment;
+import com.carcenter.model.CarOrder;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,4 +14,16 @@ public interface CarOrderService {
     boolean dealOrderByCarOwner(int orderId,boolean isAccpet);
     boolean cancelOrderByCustomer(int orderId);
     boolean makeComment(CarComment comment);
+
+    boolean startOrderByAdmin(int orderId);
+
+    boolean endOrderByAdmin(int orderId);
+
+
+
+    List<CarOrder> getAllCarOrder();
+
+    List<CarOrder> startCarOrder();
+    List<CarOrder> endCarOrder();
+
 }

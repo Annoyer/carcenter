@@ -88,4 +88,13 @@
     </select>
 
 
+    <select id="getAllCustomers" resultType="com.carcenter.model.Customer">
+        SELECT * FROM customer
+    </select>
+    <select id="selectCustomerByAttribute" resultType="com.carcenter.model.Customer" parameterType="String">
+        SELECT * FROM customer WHERE name LIKE CONCAT('%',#{value},'%') OR phone=#{value}
+    </select>
+    <delete id="delete">
+        DELETE FROM customer WHERE id=#{customerId}
+    </delete>
 </mapper>

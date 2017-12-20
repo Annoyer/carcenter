@@ -4,6 +4,7 @@ import com.carcenter.model.Car;
 import com.carcenter.model.CarOrder;
 import com.carcenter.model.Customer;
 import com.carcenter.model.ParkingOrder;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface CustomerDao {
     int save(Customer customer);
 
     int update(Customer customer);
+
+    int delete(@Param("customerId") int customerId);
 
     List<Customer> selectCustomerByPhone(String phone);
 
@@ -32,6 +35,7 @@ public interface CustomerDao {
 
     List<ParkingOrder> selectParkingOrderByCustomer(Integer customerId);
 
+    List<Customer> selectCustomerByAttribute(String value);
 
 
 }

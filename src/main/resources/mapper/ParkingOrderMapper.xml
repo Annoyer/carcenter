@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.carcenter.dao.ParkingOrderDao">
+
+    <resultMap id="parkingOrder" type="ParkingOrder">
+        <id column="id" property="id"/>
+        <result column="hirer_id" property="hirerId"/>
+        <result column="price" property="price"/>
+        <result column="start_day" property="startDay"/>
+        <result column="end_day" property="endDay"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <association property="parkingPlace" javaType="ParkingPlace">
+            <id column="parking_place_id" property="id"/>
+            <result property="identifier" column="identifier"/>
+            <association property="parkingLot" javaType="ParkingOrder">
+                <id property="parkingLotId" column="parking_lot_id"/>
+                <result property="name" column="name"/>
+                <result property="address" column="address"/>
+                <result property="priceDay" column="price_day"/>
+                <result property="priceMonth" column="price_month"/>
+            </association>
+        </association>
+    </resultMap>
+
     <insert id="save" parameterType="ParkingOrder" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO parking_order (parking_place_id,hirer_id,price,renting_period_month,renting_period_day,start_day,end_day,status,create_time)
         VALUES (#{parkingPlaceId},#{hirerId},#{price},#{rentingPeriodMonth},#{rentingPeriodDay},#{startDay},#{endDay},#{status},#{createTime})
@@ -10,4 +32,25 @@
         SET status=#{status}
         WHERE id=#{orderId}
     </update>
+    <select id="selectParkingOrderById" resultType="com.carcenter.model.ParkingOrder">
+        SELECT * FROM parking_order WHERE id=#{orderId}
+    </select>
+    <select id="selectAccessiableParkingOrderByPlaceId" resultType="com.carcenter.model.ParkingOrder">
+        SELECT * FROM parking_order WHERE parking_place_id=#{placeId} AND status!=-3 AND status!=-1 AND status!=3
+    </select>
+
+    <select id="getAllParkingOrder" resultMap="parkingOrder">
+        SELECT * FROM parking_order o LEFT JOIN parking_place p ON o.parking_place_id=p.id
+                                      LEFT JOIN parking_lot l ON p.parking_lot_id=l.id
+    </select>
+    <select id="getAllSpaceCheck" resultType="com.carcenter.model.ParkingOrder">
+        SELECT * FROM carcenter.parking_order WHERE status=2
+    </select>
+    <select id="startParkingOrder" resultType="com.carcenter.model.ParkingOrder">
+        SELECT * FROM carcenter.parking_order WHERE start_day=CURRENT_DATE AND status=0
+    </select>
+    <select id="endParkingOrder" resultType="com.carcenter.model.ParkingOrder">
+        SELECT * FROM carcenter.parking_order WHERE end_day = CURRENT_DATE AND status=1
+    </select>
+
 </mapper>

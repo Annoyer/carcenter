@@ -15,6 +15,10 @@
 <div class="offset-80">
     <div class="offset-50 container container-center">
         <div class="row">
+            <h2 class="col-md-3 text-center">个人中心</h2>
+            <hr class="col-md-12"/>
+        </div>
+        <div class="row">
             <div class="infotab col-md-3">
                 <ul class="nav2 nav-pills nav-stacked">
                     <li><a href="${path}/customer/my_info">我的基本信息</a></li>
@@ -40,63 +44,63 @@
 
                             <div class="col-xs-3 col-md-3">
                                 <div class="car-title">
-                                        ${o.car.brand}-${o.car.brandType}
+                                        ${o.car.brand}&nbsp;-&nbsp;${o.car.brandType}
                                 </div>
                                 <div class="car-brief">
                                         ${o.car.passengerNum}人座
                                 </div>
-                                <div class="car-brief">
-                                        ${o.car.city}
-                                </div>
-                            </div>
-                            <div class="col-xs-3 col-md-3">
-                                <div class="car-price-lg">
-                                    租金：${o.price}
-                                </div>
-                                <div class="car-price">
-                                    提车日期：<fmt:formatDate pattern="yyyy-MM-dd" value="${o.startDay}" />
-                                </div>
-                                <div class="car-price">
-                                    还车日期：<fmt:formatDate pattern="yyyy-MM-dd" value="${o.endDay}" />
-                                </div>
-                                <div class="car-price">
+                                <div class="order-status">
                                     订单状态：
                                     <c:choose>
-                                    <c:when test="${o.status==-3}">
-                                        已拒绝
-                                    </c:when>
-                                    <c:when test="${o.status==-2}">
-                                        顾客取消审核中
-                                    </c:when>
-                                    <c:when test="${o.status==-1}">
-                                        已取消
-                                    </c:when>
-                                    <c:when test="${o.status==0}">
-                                        待进行
-                                    </c:when>
-                                    <c:when test="${o.status==1}">
-                                        进行中
-                                    </c:when>
-                                    <c:when test="${o.status==2}">
-                                        待确认
-                                    </c:when>
-                                    <c:when test="${o.status==3}">
-                                        历史订单
-                                    </c:when>
-                                    <c:when test="${o.status==4}">
-                                        已评价
-                                    </c:when>
-                                    <c:otherwise>
-                                        未知
-                                    </c:otherwise>
+                                        <c:when test="${o.status==-3}">
+                                            已拒绝
+                                        </c:when>
+                                        <c:when test="${o.status==-2}">
+                                            顾客取消审核中
+                                        </c:when>
+                                        <c:when test="${o.status==-1}">
+                                            已取消
+                                        </c:when>
+                                        <c:when test="${o.status==0}">
+                                            待进行
+                                        </c:when>
+                                        <c:when test="${o.status==1}">
+                                            进行中
+                                        </c:when>
+                                        <c:when test="${o.status==2}">
+                                            待确认
+                                        </c:when>
+                                        <c:when test="${o.status==3}">
+                                            历史订单
+                                        </c:when>
+                                        <c:when test="${o.status==4}">
+                                            已评价
+                                        </c:when>
+                                        <c:otherwise>
+                                            未知
+                                        </c:otherwise>
                                     </c:choose>
                                 </div>
                             </div>
                             <div class="col-xs-3 col-md-3">
+                                <div class="car-brief">
+                                    提车地：${o.car.city}
+                                </div>
+                                <div class="car-brief">
+                                    提车日期：<fmt:formatDate pattern="yyyy-MM-dd" value="${o.startDay}" />
+                                </div>
+                                <div class="car-brief">
+                                    还车日期：<fmt:formatDate pattern="yyyy-MM-dd" value="${o.endDay}" />
+                                </div>
+                            </div>
+                            <div class="col-xs-3 col-md-3">
+                                <div class="car-price-lg">
+                                    ￥${o.price}
+                                </div>
                                 <c:choose>
                                     <c:when test="${o.status==2}">
-                                        <button class="btn-usual" onclick="dealOrder(${o.id},true)">接单</button>
-                                        <button class="btn-usual" onclick="dealOrder(${o.id},false)">拒绝</button>
+                                        <button class="btn-square btn-list" onclick="dealOrder(${o.id},true)">接单</button>
+                                        <button class="btn-square btn-list" onclick="dealOrder(${o.id},false)">拒绝</button>
                                     </c:when>
                                 </c:choose>
                             </div>

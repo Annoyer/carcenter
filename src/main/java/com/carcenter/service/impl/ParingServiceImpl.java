@@ -14,10 +14,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by joy12 on 2017/12/6.
@@ -68,7 +65,7 @@ public class ParingServiceImpl implements ParkingService{
         order.setParkingPlaceId(parkingPlaceId);
         order.setHirerId(Integer.parseInt(attrs.get("hirerId")[0]));
         order.setPrice(Double.parseDouble(attrs.get("price")[0]));
-        order.setStatus(2);//待管理员确认
+        order.setStatus(0);//待管理员确认
         Date start = null,end = null;
         Integer len = 0;
         try {
@@ -117,6 +114,70 @@ public class ParingServiceImpl implements ParkingService{
     }
 
     public boolean cancelOrderByCustomer(int orderId) {
-        return parkingOrderDao.updateStatus(orderId,-2) > 0;
+        boolean result = parkingOrderDao.updateStatus(orderId,-1) > 0;
+        if (result){
+            ParkingOrder order = parkingOrderDao.selectParkingOrderById(orderId);
+            correctStatus(order.getParkingPlaceId());
+        }
+        return result;
     }
+
+    public boolean startOrderByAdmin(int orderId) {
+        //订单状态变为正在进行
+        boolean result = parkingOrderDao.updateStatus(orderId,1) > 0;
+        if (result){
+            //车位状态变为已租
+            parkingPlaceDao.updateStatusById(parkingOrderDao.selectParkingOrderById(orderId).getParkingPlaceId(),1);
+        }
+
+        return result;
+    }
+
+    public boolean endOrderByAdmin(int orderId) {
+        boolean result = parkingOrderDao.updateStatus(orderId,3) > 0;
+        if (result){
+            ParkingOrder order = parkingOrderDao.selectParkingOrderById(orderId);
+            correctStatus(order.getParkingPlaceId());
+        }
+        return result;
+    }
+
+    private void correctStatus(int placeId){
+        List<ParkingOrder> orders = parkingOrderDao.selectAccessiableParkingOrderByPlaceId(placeId);
+        if (orders==null || orders.size()==0){
+            parkingPlaceDao.updateStatusById(placeId,0);
+        } else {
+            parkingPlaceDao.updateStatusById(placeId,2);
+        }
+    }
+
+
+    public List<ParkingPlace> getAllParkingSpace() {
+        return parkingPlaceDao.selectAllParkingSpace();
+    }
+
+    public boolean release(ParkingLot parkingLot) {
+        List<ParkingLot> existList = parkingLotDao.selectParkingLotByName(parkingLot.getName());
+        if (existList != null && existList.size() > 0){
+            return false;
+        } else if (parkingLotDao.save(parkingLot)>0){
+            ParkingLot lot = parkingLotDao.selectParkingLotByName(parkingLot.getName()).get(0);
+            List<ParkingPlace> places = new ArrayList<ParkingPlace>();
+            for (int i = 1; i <= lot.getVolumn(); i++) {
+                ParkingPlace p = new ParkingPlace();
+                p.setIdentifier(i);
+                p.setParkingLotId(lot.getId());
+                p.setStatus(0);
+                places.add(p);
+            }
+            return parkingPlaceDao.insertPlaceList(places) > 0;
+        }
+        return false;
+    }
+
+    public List<ParkingLot> getParkingLotByAttr(String value) {
+        return parkingLotDao.selectParkingLotByAttr(value);
+    }
+
+    public boolean deleteLot(int lotId) {return parkingLotDao.delete(lotId)>0;}
 }

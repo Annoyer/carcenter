@@ -28,6 +28,10 @@
         SELECT m.*,f.name,t.name FROM message m, customer f, customer t WHERE m.from_id=#{fromId} AND m.from_id=f.id AND m.to_id=t.id
     </select>
     <select id="selectMessageByToId" resultMap="msg">
-            SELECT m.*,f.name,t.name FROM message m, customer f, customer t WHERE m.to_id=#{toId} AND m.from_id=f.id AND m.to_id=t.id
+        SELECT m.*,f.name,t.name FROM message m, customer f, customer t WHERE m.to_id=#{toId} AND m.from_id=f.id AND m.to_id=t.id
+    </select>
+
+    <select id="selectAllMessage" resultType="com.carcenter.model.Message">
+        SELECT * FROM carcenter.message
     </select>
 </mapper>

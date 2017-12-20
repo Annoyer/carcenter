@@ -9,15 +9,33 @@
     <link rel="stylesheet" type="text/css" href="${path}/static/css/jcy.css">
     <link rel="stylesheet" type="text/css" href="${path}/static/css/style.css">
 </head>
+<style>
+    #picDiv{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+    #picDisplay{
+        width: 400px;
+        height: 300px;
+        padding: 10px;
+    }
+    #picDisplay > img{
+        width: 380px;
+        height: 280px;
+    }
+</style>
 <body>
 <!-- Page Header -->
 <jsp:include page="../common/header.jsp"></jsp:include>
 
 <!--页面内容-->
-<div class="offset-80">
-    <div class="text_title">修改车辆信息</div>
+<div class="offset-80 container">
+    <div class="form-title text-center">修改车辆信息</div>
 
-    <hr class="offset_80 my_hr_long"/>
+    <hr class="offset-30 my_hr_long"/>
     <div class="container container-center" style="width: 100%">
         <form id="carForm" class="page_content offset_60" action="${path}/customer/carModify" method="post">
             <input hidden name="id" value="${car.id}">
@@ -25,62 +43,63 @@
             <input hidden type="number" name="status" value="0">
             <div class="row offset-20">
                 <div class="col-xs-4 col-md-4">牌照号：</div>
-                <input class="col-xs-6 col-md-6" type="text" name="license">
+                <input class="col-xs-6 col-md-6" type="text" name="license" value="${car.license}">
             </div>
             <div class="row offset-20">
                 <div class="col-xs-4 col-md-4">提车地（市）：</div>
-                <input class="col-xs-6 col-md-6" type="text" name="city">
+                <input class="col-xs-6 col-md-6" type="text" name="city" value="${car.city}">
             </div>
             <div class="row offset-20">
                 <div class="col-xs-4 col-md-4">品牌：</div>
-                <input class="col-xs-6 col-md-6" type="text" name="brand">
+                <input class="col-xs-6 col-md-6" type="text" name="brand" value="${car.brand}">
             </div>
             <div class="row offset-20">
                 <div class="col-xs-4 col-md-4">型号：</div>
-                <input class="col-xs-6 col-md-6" type="text" name="brandType">
+                <input class="col-xs-6 col-md-6" type="text" name="brandType" value="${car.brandType}">
             </div>
             <div class="row offset-20">
                 <div class="col-xs-4 col-md-4">生产年份：</div>
-                <input class="col-xs-6 col-md-6" type="number" min="2000" step="1" max="2018" name="manufactureYear">
+                <input class="col-xs-6 col-md-6" value="${car.manufactureYear}" type="number" min="2000" step="1" max="2018" name="manufactureYear">
             </div>
             <div class="row offset-20">
                 <div class="col-xs-4 col-md-4">颜色：</div>
-                <input class="col-xs-6 col-md-6" type="text" name="color">
+                <input class="col-xs-6 col-md-6" value="${car.color}" type="text" name="color">
             </div>
             <div class="row offset-20">
                 <div class="col-xs-4 col-md-4">座位数：</div>
-                <select class="col-xs-2 col-md-2" name="passengerNum">
+                <select class="col-xs-2 col-md-2" name="passengerNum" value="${car.passengerNum}">
                     <option value="2">2</option>
                     <option value="5">5</option>
                     <option value="7">7</option>
                     <option value="-1">7人以上</option>
                 </select>
             </div>
-            <div class="row offset-20">
+            <div class="row offset-30">
                 <div class="col-xs-4 col-md-4">
                     <label>日租价（元/天）：</label>
-                    <input type="number" min="0.0" step="0.1" name="priceDay">
+                    <input type="number" min="0.0" step="0.1" name="priceDay" value="${car.priceDay}">
                 </div>
                 <div class="col-xs-4 col-md-4">
                     <label>周租价（元/周）：</label>
-                    <input type="number" min="0.0" step="0.1" name="priceWeek">
+                    <input type="number" min="0.0" step="0.1" name="priceWeek" value="${car.priceWeek}">
                 </div>
                 <div class="col-xs-4 col-md-4">
                     <label>月租价（元/月）：</label>
-                    <input type="number" min="0.0" step="0.1" name="priceMonth">
+                    <input type="number" min="0.0" step="0.1" name="priceMonth" value="${car.priceMonth}">
                 </div>
             </div>
-            <input hidden name="photo" value="">
+            <input hidden name="photo" value="${car.photo}">
         </form>
-        <div class="row offset-20">
-            <form id="picForm">
-                <label>照片上传：(仅支持.jpg .png)</label>
-                <input id="picInput" type="file" name="pic" onchange="checkFileExt(this.value)"/>
+        <div id="picDiv" class="offset-30 page_content">
+            <form id="picForm" class="row">
+                <label for="picInput" class="col-xs-5">照片上传：(仅支持.jpg .png)</label>
+                <input id="picInput" class="col-xs-7" type="file" name="pic" onchange="checkFileExt(this.value)"/>
             </form>
-            <div id="picDisplay" style="width: 400px; height: 300px">
+            <div id="picDisplay" class="row" style="width: 400px; height: 300px">
+                <img src="${path}/static/img/car.svg">
             </div>
         </div>
-        <button class="btn-usual" onclick="formSubmit()">提交</button>
+        <button class="btn-usual btn-md-my offset-30" onclick="formSubmit()">提交</button>
 
     </div>
 

@@ -25,4 +25,7 @@ public interface CarService {
     String saveCarPic(MultipartFile file, HttpServletRequest request);
     boolean deleteCar(Integer id);
     boolean modifyCar(Car car);
+    boolean checkCar(int id);
+
+    List<Car> getCarsNeedCheck();
 }

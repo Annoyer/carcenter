@@ -11,10 +11,37 @@
         WHERE id=#{orderId}
     </update>
     <select id="selectCarOrderByCarIdAndTime" resultType="com.carcenter.model.CarOrder">
-        SELECT id FROM car_order WHERE car_id=#{carId} AND (start_day BETWEEN '2000-01-01' AND #{end}
-                                              or end_day BETWEEN #{start} AND '2200-12-31')
+        SELECT id FROM car_order WHERE car_id=#{carId} AND
+        (
+            (
+              start_day BETWEEN #{start} AND #{end}
+              or end_day BETWEEN #{start} AND #{end}
+              or (
+                    start_day BETWEEN '2000-01-01' AND #{start}
+                    and end_day BETWEEN #{end} AND '2100-12-31'
+                  )
+            )
+            AND status > -1
+        )
     </select>
     <select id="selectCarByOrderId" resultType="com.carcenter.model.Car">
         SELECT * FROM car LEFT JOIN car_order ON car_order.car_id=car.id WHERE car_order.id=#{orderId}
     </select>
+    <select id="selectAccessiableCarOrderByCarId" resultType="com.carcenter.model.CarOrder">
+        SELECT * FROM car_order WHERE car_id=#{carId} AND status!=-1 AND status!=-3 AND status!=3
+    </select>
+
+    <select id="getAllCarOrder" resultType="com.carcenter.model.CarOrder">
+        SELECT * FROM carcenter.car_order
+    </select>
+
+    <select id="startCarOrder" resultType="com.carcenter.model.CarOrder">
+        SELECT * FROM carcenter.car_order WHERE start_day=CURRENT_DATE AND status=0
+    </select>
+
+    <select id="endCarOrder" resultType="com.carcenter.model.CarOrder">
+        SELECT * FROM carcenter.car_order WHERE end_day=CURRENT_DATE AND status=1
+    </select>
+
+
 </mapper>

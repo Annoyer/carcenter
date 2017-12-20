@@ -74,4 +74,13 @@ public class CustomerServiceImpl implements CustomerService {
     public List<CarOrder> getCarOrdersByOwner(Integer customerId) {
         return customerDao.selectCarOrderByOwner(customerId);
     }
+
+
+    public List<Customer> getCustomerByAttribute(String value) {
+        return customerDao.selectCustomerByAttribute(value);
+    }
+
+    public boolean deleteCustomer(int customerId) {
+        return customerDao.delete(customerId)>0;
+    }
 }

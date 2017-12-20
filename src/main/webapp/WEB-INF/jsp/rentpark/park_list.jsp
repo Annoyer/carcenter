@@ -29,17 +29,21 @@
     <div class="offset-80">
         <ul id="listContainer" class="container list-vertical-container">
             <c:forEach items="${parkingLots}" var="p">
-                <li class="row">
-                    <div class="col-xs-8 col-md-8">
+                <li class="row list-vertical-item">
+                    <div class="col-xs-4 col-md-4">
                         <div>${p.name}</div>
                         <div>地址：${p.address}</div>
+                    </div>
+                    <div class="col-xs-3 col-md-3">
                         <div>总容量：${p.name}</div>
                         <div>空闲容量：${p.name}</div>
                     </div>
-                    <div class="col-xs-4 col-md-4">
-                        <div>日租金：${p.priceDay}</div>
-                        <div>月租金：${p.priceMonth}</div>
-                        <button class="btn-usual" onclick="javascript:location='${path}/parking/order?lotId=${p.id}'">预约</button>
+                    <div class="col-xs-3 col-md-3">
+                        <div class="car-price-label">日租：<span class="car-price"> ￥${p.priceDay}</span></div>
+                        <div class="car-price-label">月租：<span class="car-price"> ￥${p.priceMonth}</span></div>
+                    </div>
+                    <div class="col-xs-2 col-md-2">
+                        <button class="btn-order" onclick="javascript:location='${path}/parking/order?lotId=${p.id}'">预约</button>
                     </div>
                 </li>
             </c:forEach>

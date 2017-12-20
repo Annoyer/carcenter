@@ -13,13 +13,12 @@
 <body>
 <!-- Page Header -->
 <jsp:include page="common/header.jsp"></jsp:include>
-<h2 class="offset-80">
-    Oops！
-</h2>
-<div>
-    ${msg}
+<div class="offset-180 container-center">
+    <h2 class="offset-50">
+        ${msg}
+    </h2>
+    <button class="btn-usual btn-md-my offset-50" onclick="javascript:location='${path}/index'">回首页</button>
 </div>
-<button class="btn-usual" onclick="javascript:location='index'">回首页</button>
 
 <!-- Page Footer -->
 <jsp:include page="common/footer.jsp"></jsp:include>

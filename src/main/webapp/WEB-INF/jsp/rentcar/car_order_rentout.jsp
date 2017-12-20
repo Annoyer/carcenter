@@ -9,15 +9,33 @@
     <link rel="stylesheet" type="text/css" href="${path}/static/css/jcy.css">
     <link rel="stylesheet" type="text/css" href="${path}/static/css/style.css">
 </head>
+<style>
+    #picDiv{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+    #picDisplay{
+        width: 400px;
+        height: 300px;
+        padding: 10px;
+    }
+    #picDisplay > img{
+        width: 380px;
+        height: 280px;
+    }
+</style>
 <body>
 <!-- Page Header -->
 <jsp:include page="../common/header.jsp"></jsp:include>
 
 <!--页面内容-->
 <div class="offset-80">
-        <div class="text_title">车辆信息</div>
+        <div class="form-title text-center">车辆信息</div>
 
-        <hr class="offset_80 my_hr_long"/>
+        <hr class="offset-30 my_hr_long"/>
         <div class="container container-center" style="width: 100%">
             <form id="carForm" class="page_content offset_60" action="${path}/car/add" method="post">
                 <input hidden name="ownerId" value="<%=customer.getId()%>">
@@ -71,16 +89,16 @@
             </div>
                 <input hidden name="photo" value="">
             </form>
-            <div class="row offset-20">
-                <form id="picForm">
-                    <label>照片上传：(仅支持.jpg .png)</label>
-                    <input id="picInput" type="file" name="pic" onchange="checkFileExt(this.value)"/>
+            <div id="picDiv" class="offset-30 page_content">
+                <form id="picForm" class="row">
+                    <label for="picInput" class="col-xs-5">照片上传：(仅支持.jpg .png)</label>
+                    <input id="picInput" class="col-xs-7" type="file" name="pic" onchange="checkFileExt(this.value)"/>
                 </form>
-                <div id="picDisplay" style="width: 400px; height: 300px">
+                <div id="picDisplay" class="row" style="width: 400px; height: 300px">
+                    <img src="${path}/static/img/car.svg">
                 </div>
             </div>
-            <button class="btn-usual" onclick="formSubmit()">提交</button>
-
+            <button class="btn-usual btn-md-my offset-30" onclick="formSubmit()">提交</button>
         </div>
 
 

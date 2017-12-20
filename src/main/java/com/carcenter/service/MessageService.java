@@ -12,4 +12,6 @@ public interface MessageService {
     List<Message> getMsgByToId(Integer toId);
     boolean sendMsg(int fromId, int toId, String content);
     void setReadStatus(int[] msgIds,int status);
+
+    List<Message> getAllMsg();
 }
